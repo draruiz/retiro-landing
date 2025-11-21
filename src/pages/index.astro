@@ -4,6 +4,8 @@ import Footer from "../components/Footer.astro";
 import backgroundStars from "../assets/backgorund.png";
 import mainLogo from "../assets/main_logo_brain.png";
 import docAlejandra from "../assets/doc_alejandra-perfil_whatsapp.jpeg";
+import bosqueRioDeOro from "../assets/bosque_1_rio_de_oro.jpg";
+import bosque2RioDeOro from "../assets/bosque_2_rio_de_oro.jpg";
 import LocationShowcase from "../components/LocationShowcase.astro";
 ---
 
@@ -127,7 +129,11 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     <LocationShowcase />
 
     <!-- Propósito Section -->
-    <section class='purpose-section' id='proposito'>
+    <section
+      class='purpose-section'
+      id='proposito'
+      style={`background: linear-gradient(rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.85)), url(${bosqueRioDeOro.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
+    >
       <div class='container'>
         <div class='section-header'>
           <h2 class='section-title'>La pausa que tu alma estaba pidiendo</h2>
@@ -206,7 +212,10 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     </section>
 
     <!-- Enfoque Section -->
-    <section class='investment-section'>
+    <section
+      class='investment-section'
+      style={`background: linear-gradient(rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.85)), url(${bosque2RioDeOro.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
+    >
       <div class='container'>
         <div class='approach-grid'>
           <div class='approach-column'>
@@ -284,6 +293,12 @@ import LocationShowcase from "../components/LocationShowcase.astro";
 
     <!-- Actividades Principales Section -->
     <section class='activities-section' id='actividades'>
+      <video autoplay muted loop playsinline class='activities-video-bg'>
+        <source
+          src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/ed69179c3038dc5546bf71c8dcf865bb/manifest/video.m3u8'
+          type='application/x-mpegURL'
+        />
+      </video>
       <div class='container'>
         <div class='section-header'>
           <h2 class='section-title'>Actividades Principales</h2>
@@ -713,6 +728,12 @@ import LocationShowcase from "../components/LocationShowcase.astro";
 
     <!-- Por Qué Ir Section -->
     <section class='why-attend-section'>
+      <video autoplay muted loop playsinline class='why-attend-video-bg'>
+        <source
+          src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/078c3950f2b30797f837df3fa1976bd0/manifest/video.m3u8'
+          type='application/x-mpegURL'
+        />
+      </video>
       <div class='container'>
         <div class='why-attend-header'>
           <span class='decorative-line'></span>
@@ -1232,8 +1253,8 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     }
 
     .title-subtitle {
-      font-size: clamp(1.2rem, 3vw, 2.2rem);
-      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
       font-style: italic;
       color: rgba(255, 255, 255, 0.9);
       letter-spacing: 3px;
@@ -1242,7 +1263,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     .hero-description {
       font-family: var(--font-secondary);
       font-size: clamp(1.1rem, 2vw, 1.3rem);
-      font-weight: 300;
+      font-weight: 700;
       line-height: 1.8;
       max-width: 700px;
       margin: 0 auto 3rem;
@@ -1404,7 +1425,6 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     /* Purpose Section */
     .purpose-section {
       padding: 8rem 0;
-      background: #0a0a0f;
       position: relative;
     }
 
@@ -1851,6 +1871,26 @@ import LocationShowcase from "../components/LocationShowcase.astro";
       padding: 8rem 0;
       background: #0a0a0f;
       position: relative;
+      overflow: hidden;
+    }
+
+    .activities-video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      opacity: 0.3;
+      object-fit: cover;
+    }
+
+    .activities-section .container {
+      position: relative;
+      z-index: 1;
     }
 
     .activities-section::before {
@@ -2681,6 +2721,25 @@ import LocationShowcase from "../components/LocationShowcase.astro";
       background: rgba(15, 15, 20, 0.5);
       position: relative;
       overflow: hidden;
+    }
+
+    .why-attend-video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      opacity: 0.3;
+      object-fit: cover;
+    }
+
+    .why-attend-section .container {
+      position: relative;
+      z-index: 1;
     }
 
     .why-attend-section::before {
@@ -3541,7 +3600,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     document.addEventListener("DOMContentLoaded", () => {
       const navbar = document.getElementById("navbar") as HTMLElement;
       const navbarToggle = document.getElementById(
-        "navbarToggle",
+        "navbarToggle"
       ) as HTMLButtonElement;
       const navbarMenu = document.getElementById("navbarMenu") as HTMLElement;
       const navbarLinks = document.querySelectorAll(".navbar-link");
@@ -3596,7 +3655,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
 
       // Observe animated elements
       const animatedElements = document.querySelectorAll(
-        ".purpose-card, .experience-item, .day-card",
+        ".purpose-card, .experience-item, .day-card"
       );
       animatedElements.forEach((el) => observer.observe(el));
 
@@ -3607,7 +3666,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
           function (this: HTMLAnchorElement, e: Event) {
             e.preventDefault();
             const target = document.querySelector(
-              this.getAttribute("href") || "",
+              this.getAttribute("href") || ""
             );
             if (target) {
               target.scrollIntoView({
@@ -3615,7 +3674,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
                 block: "start",
               });
             }
-          },
+          }
         );
       });
 
