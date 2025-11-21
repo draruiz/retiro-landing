@@ -75,51 +75,21 @@ import LocationShowcase from "../components/LocationShowcase.astro";
           <span class='date-badge'>📅 Mayo, 2026</span>
         </div>
         <div class='cta-wrapper reveal-opacity delay-4'>
-          <a href='#inscripcion' class='cta-button'>Reserva tu Espacio</a>
+          <a href='#location-showcase' class='cta-button'>Ver más información</a
+          >
         </div>
       </div>
     </section>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const hero = document.querySelector(".hero");
-        const logoContainer = document.getElementById("logo-container");
         const heroBg = document.getElementById("hero-bg");
 
-        if (hero && logoContainer) {
-          hero.addEventListener("mousemove", (e) => {
-            // Cast event to any to access clientX/Y without TS errors
-            const mouseEvent = e;
-            const { left, top, width, height } = hero.getBoundingClientRect();
-            const x = (mouseEvent.clientX - left) / width - 0.5;
-            const y = (mouseEvent.clientY - top) / height - 0.5;
-
-            // Tilt effect for logo
-            const tiltX = y * 20; // Max rotation deg
-            const tiltY = -x * 20;
-
-            logoContainer.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
-
-            // Subtle parallax for background
-            if (heroBg) {
-              heroBg.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
-            }
-          });
-
-          hero.addEventListener("mouseleave", () => {
-            logoContainer.style.transform =
-              "rotateX(0deg) rotateY(0deg) scale(1)";
-            if (heroBg) {
-              heroBg.style.transform = "scale(1.1) translate(0, 0)";
-            }
-          });
-        }
-
-        // Scroll Parallax
+        // Simple Scroll Parallax
         window.addEventListener("scroll", () => {
           const scrolled = window.scrollY;
           if (heroBg && scrolled < window.innerHeight) {
-            heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+            heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
           }
         });
       });
