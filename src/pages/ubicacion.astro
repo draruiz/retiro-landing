@@ -1,0 +1,823 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import mainLogo from "../assets/main_logo_brain.png";
+import backgroundStars from "../assets/backgorund.png";
+---
+
+<Layout>
+  <!-- Navbar -->
+  <nav class='navbar' id='navbar'>
+    <div class='navbar-container'>
+      <div class='navbar-logo'>
+        <img src={mainLogo.src} alt='CALMA Logo' class='navbar-logo-img' />
+        <span class='navbar-brand'>CALMA</span>
+      </div>
+
+      <button class='navbar-toggle' id='navbarToggle' aria-label='Toggle menu'>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+      </button>
+
+      <div class='navbar-menu' id='navbarMenu'>
+        <a href='/' class='navbar-link'>← Volver al inicio</a>
+        <a href='/faq' class='navbar-link'>FAQ</a>
+        <a href='/#inscripcion' class='navbar-link navbar-cta'>Inscríbete</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class='location-page'>
+    <!-- Hero Header -->
+    <section class='location-hero'>
+      <div class='container'>
+        <h1 class='page-title fade-in'>Ubicación</h1>
+        <p class='page-subtitle fade-in-delay'>
+          Un lugar mágico en el corazón de la naturaleza colombiana
+        </p>
+      </div>
+    </section>
+
+    <!-- Location Content -->
+    <section class='location-section'>
+      <div class='container'>
+        <div class='section-intro'>
+          <span class='section-label'>Destino</span>
+          <div class='section-divider'></div>
+        </div>
+        <div class='location-content'>
+          <div class='location-info'>
+            <h2 class='location-subtitle'>
+              A 40 minutos de Guatapé y la Piedra del Peñol
+            </h2>
+            <p class='location-description'>
+              Río de Oro está ubicado muy cerca de uno de los destinos más
+              mágicos y visitados de Colombia: <strong>Guatapé</strong>, el
+              pueblo más colorido del país, y la imponente <strong
+                >Piedra del Peñol</strong
+              >.
+            </p>
+
+            <div class='location-features'>
+              <div class='location-feature'>
+                <div class='feature-icon'>🏞️</div>
+                <div class='feature-content'>
+                  <h3>Amplía tu experiencia</h3>
+                  <p>
+                    Si llegas un día antes o te quedas después del retiro,
+                    podrás recorrer Guatapé, subir la Piedra, navegar la represa
+                    y disfrutar miradores, paisajes y cafés espectaculares.
+                  </p>
+                </div>
+              </div>
+
+              <div class='location-feature'>
+                <div class='feature-icon'>✨</div>
+                <div class='feature-content'>
+                  <h3>Un viaje completo para el alma</h3>
+                  <p>
+                    Combina el retiro con turismo, naturaleza y descanso
+                    profundo. Transforma este fin de semana en una pausa
+                    inolvidable que renueva tu energía por dentro y por fuera.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='location-map'>
+            <iframe
+              src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.123456789!2d-75.077250!3d6.314180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTgnNTEuMCJOIDc1wrAwNCczOC4xIlc!5e0!3m2!1ses!2sco!4v1234567890'
+              width='100%'
+              height='450'
+              style='border:0; border-radius: 20px;'
+              allowfullscreen=''
+              loading='lazy'
+              referrerpolicy='no-referrer-when-downgrade'
+              title='Ubicación del Retiro CALMA'></iframe>
+            <a
+              href='https://www.google.com/maps/search/?api=1&query=6.314180,-75.077250'
+              target='_blank'
+              rel='noopener noreferrer'
+              class='map-link'
+            >
+              📍 Abrir en Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class='location-cta'>
+      <div class='container'>
+        <h2 class='cta-title'>¿Lista para esta experiencia transformadora?</h2>
+        <a href='/#inscripcion' class='cta-button'>Reserva tu Espacio</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Navbar Styles - Same luxury style as FAQ */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.25rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .navbar-logo:hover {
+    opacity: 0.8;
+  }
+
+  .navbar-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .navbar-brand {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+  }
+
+  .navbar-menu {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .navbar-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .navbar-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #c9a961;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-link:hover {
+    color: #ffffff;
+  }
+
+  .navbar-link:hover::after {
+    width: 100%;
+  }
+
+  .navbar-cta {
+    background: rgba(201, 169, 97, 0.15);
+    color: #c9a961 !important;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0;
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  .navbar-cta::after {
+    display: none;
+  }
+
+  .navbar-cta:hover {
+    background: rgba(201, 169, 97, 0.25);
+    border-color: rgba(201, 169, 97, 0.5);
+    transform: none;
+  }
+
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .hamburger-line {
+    width: 25px;
+    height: 1px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  /* Main Content */
+  .location-page {
+    min-height: 100vh;
+    background: #0a0a0f;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .location-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at 20% 30%,
+        rgba(201, 169, 97, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 70%,
+        rgba(45, 67, 86, 0.08) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .location-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7) contrast(1.1);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 15, 0.7) 0%,
+      rgba(10, 10, 15, 0.5) 50%,
+      rgba(10, 10, 15, 0.9) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 4rem;
+  }
+
+  .page-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .page-subtitle {
+    font-family: "Inter", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+    animation: fadeInUp 1s ease-out 0.4s backwards;
+  }
+
+  .scroll-indicator span {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .arrow-down {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(
+      to bottom,
+      rgba(201, 169, 97, 0.6),
+      transparent
+    );
+    animation: arrowBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes arrowBounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.5;
+    }
+  }
+
+  .location-section {
+    padding: 0 4rem 8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-intro {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 6rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  }
+
+  .section-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(201, 169, 97, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+  }
+
+  .section-divider {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(to right, rgba(201, 169, 97, 0.3), transparent);
+  }
+
+  .location-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: start;
+  }
+
+  .location-info {
+    background: transparent;
+    padding: 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  }
+
+  .location-subtitle {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .location-description {
+    font-family: "Inter", sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    letter-spacing: 0.01em;
+  }
+
+  .location-features {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .location-feature {
+    display: flex;
+    gap: 2rem;
+    padding: 2.5rem;
+    background: rgba(15, 15, 20, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .location-feature::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #c9a961, transparent);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .location-feature:hover::before {
+    opacity: 1;
+  }
+
+  .location-feature:hover {
+    border-color: rgba(201, 169, 97, 0.2);
+    transform: translateX(5px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    filter: grayscale(0.3);
+    transition: filter 0.3s ease;
+  }
+
+  .location-feature:hover .feature-icon {
+    filter: grayscale(0);
+  }
+
+  .feature-content h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #c9a961;
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  .feature-content p {
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.9;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .location-map {
+    position: sticky;
+    top: 150px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.8s forwards;
+  }
+
+  .location-map iframe {
+    width: 100%;
+    border-radius: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    filter: grayscale(0.3) brightness(0.9) contrast(1.1);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .location-map iframe:hover {
+    filter: grayscale(0) brightness(1) contrast(1);
+    border-color: rgba(201, 169, 97, 0.15);
+    box-shadow:
+      0 25px 70px rgba(0, 0, 0, 0.6),
+      inset 0 0 0 1px rgba(201, 169, 97, 0.1);
+  }
+
+  .map-link {
+    font-family: "Inter", sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 1.125rem 2.5rem;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 400;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 169, 97, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  .map-link:hover::before {
+    left: 100%;
+  }
+
+  .map-link:hover {
+    background: rgba(201, 169, 97, 0.08);
+    border-color: rgba(201, 169, 97, 0.4);
+    color: #c9a961;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* CTA Section */
+  .location-cta {
+    padding: 6rem 4rem;
+    background: transparent;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 4rem;
+  }
+
+  .location-cta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(201, 169, 97, 0.3),
+      transparent
+    );
+  }
+
+  .cta-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-button {
+    font-family: "Inter", sans-serif;
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    background: rgba(201, 169, 97, 0.95);
+    color: #0a0a0f;
+    text-decoration: none;
+    border: 1px solid #c9a961;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background: #c9a961;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201, 169, 97, 0.3);
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .fade-in-delay {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .navbar-container {
+      padding: 1.25rem 3rem;
+    }
+
+    .location-hero,
+    .location-section,
+    .location-cta {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    .location-content {
+      gap: 4rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 1rem 1.5rem;
+    }
+
+    .navbar-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 15, 0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      padding: 1.5rem;
+      gap: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar-menu.active {
+      display: flex;
+    }
+
+    .navbar-toggle {
+      display: flex;
+    }
+
+    .location-hero {
+      padding: 10rem 1.5rem 4rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+    }
+
+    .location-section {
+      padding: 0 1.5rem 6rem;
+    }
+
+    .section-intro {
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+    }
+
+    .location-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .location-map {
+      position: relative;
+      top: 0;
+    }
+
+    .location-feature {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+    }
+
+    .location-feature:hover {
+      transform: none;
+    }
+
+    .location-cta {
+      padding: 4rem 1.5rem;
+    }
+
+    .cta-title {
+      font-size: 1.75rem;
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 1rem 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const navbarToggle = document.getElementById("navbarToggle");
+  const navbarMenu = document.getElementById("navbarMenu");
+
+  navbarToggle?.addEventListener("click", () => {
+    navbarMenu?.classList.toggle("active");
+  });
+
+  // Close menu when clicking a link
+  const navbarLinks = document.querySelectorAll(".navbar-link");
+  navbarLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navbarMenu?.classList.remove("active");
+    });
+  });
+</script>

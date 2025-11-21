@@ -1,0 +1,423 @@
+---
+import mainLogo from "../../assets/main_logo_brain.png";
+import Footer from "../../components/Footer.astro";
+import { accommodations } from "../../data/accommodations";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  return accommodations.map((accommodation) => ({
+    params: { id: accommodation.id },
+    props: { accommodation },
+  }));
+}
+
+const { accommodation } = Astro.props;
+---
+
+<Layout>
+  <!-- Navbar -->
+  <nav class='navbar' id='navbar'>
+    <div class='navbar-container'>
+      <div class='navbar-logo'>
+        <img src={mainLogo.src} alt='CALMA Logo' class='navbar-logo-img' />
+        <span class='navbar-brand'>CALMA</span>
+      </div>
+      <a href='/acomodaciones' class='back-link'>← Volver</a>
+    </div>
+  </nav>
+
+  <main class='detail-page'>
+    <!-- Hero Section -->
+    <section class='detail-hero'>
+      <div class='hero-image-wrapper'>
+        <img
+          src={accommodation.images[0]}
+          alt={accommodation.title}
+          class='hero-image'
+        />
+        <div class='hero-overlay'></div>
+      </div>
+      <div class='hero-content container'>
+        <span class='hero-subtitle'>{accommodation.category}</span>
+        <h1 class='hero-title'>
+          {accommodation.title}
+        </h1>
+        <div class='hero-price'>
+          {accommodation.price}
+          <span class='per-person'>/ persona</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class='gallery-section container'>
+      <div class='gallery-grid'>
+        {
+          accommodation.images.slice(1).map((image) => (
+            <div class='gallery-item'>
+              <img src={image} alt={accommodation.title} />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class='detail-content container'>
+      <div class='content-grid'>
+        <div class='main-info'>
+          <h2 class='section-title'>Descripción</h2>
+          <p class='description-text'>{accommodation.description}</p>
+
+          <div class='amenities-section'>
+            <h3 class='subsection-title'>Comodidades</h3>
+            <ul class='amenities-grid'>
+              {
+                accommodation.amenities.map((amenity) => (
+                  <li class='amenity-item'>
+                    <span class='check-icon'>✓</span>
+                    {amenity}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div class='booking-sidebar'>
+          <div class='booking-card'>
+            <h3 class='card-title'>Reserva tu lugar</h3>
+            <div class='price-display'>
+              <span class='amount'>{accommodation.price}</span>
+              <span class='period'>{accommodation.priceLabel}</span>
+            </div>
+            <p class='booking-note'>
+              Incluye alojamiento completo durante los 3 días del retiro, todas
+              las comidas, actividades terapéuticas y holísticas, materiales y
+              acceso a todas las instalaciones.
+            </p>
+            <a href='/#inscripcion' class='book-btn'>Iniciar Inscripción</a>
+            <p class='limited-spots'>Cupos limitados</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+  :root {
+    --color-bg: #0a0a0f;
+    --color-text: #e2e8f0;
+    --color-accent: #c9a961;
+    --color-dark-card: #12121a;
+    --font-heading: "Cormorant Garamond", serif;
+    --font-body: "Inter", sans-serif;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .navbar-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .navbar-logo-img {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+  }
+
+  .navbar-brand {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: #fff;
+  }
+
+  .back-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  /* Hero */
+  .detail-hero {
+    height: 70vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 6rem;
+  }
+
+  .hero-image-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-bg) 10%, transparent 80%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .hero-subtitle {
+    display: block;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .hero-price {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .per-person {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Gallery */
+  .gallery-section {
+    padding: 4rem 2rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Content */
+  .detail-content {
+    padding: 4rem 2rem 6rem;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 6rem;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-accent);
+  }
+
+  .description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4rem;
+  }
+
+  .subsection-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+  }
+
+  .check-icon {
+    color: var(--color-accent);
+  }
+
+  /* Sidebar */
+  .booking-card {
+    background: var(--color-dark-card);
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 8rem;
+    border-radius: 8px;
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+
+  .price-display {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .amount {
+    display: block;
+    font-size: 2rem;
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+  }
+
+  .period {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .booking-note {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .book-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-accent);
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .book-btn:hover {
+    background: #fff;
+  }
+
+  .limited-spots {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .detail-hero {
+      height: 60vh;
+    }
+    .hero-title {
+      font-size: 3rem;
+    }
+    .booking-card {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,239 @@
+---
+interface Props {
+  accommodation: {
+    id: string;
+    title: string;
+    category: string;
+    description: string;
+    price: string;
+    priceLabel: string;
+    amenities: string[];
+    images: string[];
+    badge?: string;
+  };
+}
+
+const { accommodation } = Astro.props;
+---
+
+<article class='accommodation-card' data-id={accommodation.id}>
+  <div class='card-image-container'>
+    <img
+      src={accommodation.images[0]}
+      alt={accommodation.title}
+      class='card-image'
+      loading='lazy'
+    />
+    {
+      accommodation.badge && (
+        <span class='premium-badge'>{accommodation.badge}</span>
+      )
+    }
+    <div class='card-overlay'>
+      <span class='view-details'>Ver Detalles</span>
+    </div>
+  </div>
+
+  <div class='card-content'>
+    <h3 class='card-title'>{accommodation.title}</h3>
+    <p class='card-description'>{accommodation.description}</p>
+
+    <div class='card-footer'>
+      <div class='price-container'>
+        <span class='price-label'>{accommodation.priceLabel}</span>
+        <span class='price-amount'>{accommodation.price}</span>
+      </div>
+      <button
+        class='details-btn'
+        aria-label={`Ver detalles de ${accommodation.title}`}
+      >
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='1'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          class='arrow-icon'
+          ><line x1='5' y1='12' x2='19' y2='12'></line><polyline
+            points='12 5 19 12 12 19'></polyline></svg
+        >
+      </button>
+    </div>
+  </div>
+</article>
+
+<style>
+  .accommodation-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .accommodation-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(201, 169, 97, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-image-container {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .accommodation-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .premium-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #c9a961;
+    color: #0a0a0f;
+    padding: 0.25rem 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .accommodation-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .view-details {
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  .accommodation-card:hover .view-details {
+    transform: translateY(0);
+  }
+
+  .card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(20, 20, 25, 0.5),
+      rgba(10, 10, 15, 0.8)
+    );
+  }
+
+  .card-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .card-description {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.5rem;
+  }
+
+  .price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .price-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .price-amount {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    color: #c9a961;
+    font-weight: 400;
+  }
+
+  .details-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .accommodation-card:hover .details-btn {
+    background: #c9a961;
+    border-color: #c9a961;
+    color: #0a0a0f;
+  }
+</style>

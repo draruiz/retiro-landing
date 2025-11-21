@@ -1,0 +1,366 @@
+---
+import mainLogo from "../assets/main_logo_brain.png";
+---
+
+<footer class='site-footer'>
+  <div class='footer-container'>
+    <div class='footer-content'>
+      <!-- Brand Section -->
+      <div class='footer-brand'>
+        <div class='footer-logo'>
+          <img src={mainLogo.src} alt='CALMA Logo' class='footer-logo-img' />
+          <span class='footer-brand-name'>CALMA</span>
+        </div>
+        <p class='footer-tagline'>El Retiro para Soltar y Renacer</p>
+        <p class='footer-description'>
+          Un encuentro terapéutico-espiritual para reconectar con tu paz
+          interior.
+        </p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class='footer-links'>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href='/'>Inicio</a></li>
+          <li><a href='/#proposito'>Propósito</a></li>
+          <li><a href='/#actividades'>Actividades</a></li>
+          <li><a href='/#itinerario'>Itinerario</a></li>
+        </ul>
+      </div>
+
+      <!-- Information Links -->
+      <div class='footer-links'>
+        <h4>Información</h4>
+        <ul>
+          <li><a href='/ubicacion'>Ubicación</a></li>
+          <li><a href='/faq'>Preguntas Frecuentes</a></li>
+          <li><a href='/politicas-cancelacion'>Políticas de Cancelación</a></li>
+          <li><a href='/#inscripcion'>Inscripción</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Section -->
+      <div class='footer-contact'>
+        <h4>Contacto</h4>
+        <ul>
+          <li>
+            <span class='contact-icon'>📧</span>
+            <a href='mailto:contacto@dra-ruiz.com'>contacto@dra-ruiz.com</a>
+          </li>
+          <li>
+            <span class='contact-icon'>📍</span>
+            <span>Río de Oro, Colombia</span>
+          </li>
+          <li>
+            <span class='contact-icon'>📅</span>
+            <span>Mayo 2026</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class='footer-bottom'>
+      <p class='copyright'>
+        © {new Date().getFullYear()} CALMA - Dra. María Alejandra Ruiz. Todos los
+        derechos reservados.
+      </p>
+      <p class='footer-note'>
+        Diseñado con 💚 para tu bienestar y transformación
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+  .site-footer {
+    background: #0a0a0f;
+    color: rgba(255, 255, 255, 0.95);
+    padding: 5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .site-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 800px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  /* Brand Section */
+  .footer-brand {
+    max-width: 380px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.3));
+  }
+
+  .footer-brand-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 2px;
+  }
+
+  .footer-tagline {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(201, 169, 97, 0.9);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-description {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 0.3px;
+  }
+
+  /* Links Sections */
+  .footer-links h4,
+  .footer-contact h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-links ul,
+  .footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li,
+  .footer-contact li {
+    margin-bottom: 0.85rem;
+  }
+
+  .footer-links a,
+  .footer-contact a {
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    position: relative;
+  }
+
+  .footer-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #c9a961, transparent);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .footer-links a:hover,
+  .footer-contact a:hover {
+    color: #c9a961;
+    transform: translateX(4px);
+  }
+
+  .footer-links a:hover::after {
+    width: 100%;
+  }
+
+  /* Contact Section */
+  .footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .contact-icon {
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+
+  .footer-contact span {
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+  }
+
+  /* Footer Bottom */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 2.5rem;
+    text-align: center;
+  }
+
+  .copyright {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.3px;
+  }
+
+  .footer-note {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    letter-spacing: 0.3px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .footer-content {
+      grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+      gap: 3rem;
+    }
+
+    .footer-brand {
+      max-width: 320px;
+    }
+
+    .footer-brand-name {
+      font-size: 1.75rem;
+    }
+
+    .footer-links h4,
+    .footer-contact h4 {
+      font-size: 1.15rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 2.5rem;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 4rem 1.5rem 2rem;
+    }
+
+    .site-footer::before {
+      width: 90%;
+    }
+
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      text-align: center;
+    }
+
+    .footer-logo {
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-brand-name {
+      font-size: 1.65rem;
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+    }
+
+    .footer-description {
+      font-size: 0.9rem;
+    }
+
+    .footer-links,
+    .footer-contact {
+      text-align: center;
+    }
+
+    .footer-links h4,
+    .footer-contact h4 {
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-contact li {
+      justify-content: center;
+    }
+
+    .footer-links a:hover,
+    .footer-contact a:hover {
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+    }
+
+    .copyright,
+    .footer-note {
+      font-size: 0.85rem;
+    }
+  }
+</style>

@@ -1,0 +1,935 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import mainLogo from "../assets/main_logo_brain.png";
+import backgroundStars from "../assets/backgorund.png";
+---
+
+<Layout>
+  <!-- Navbar -->
+  <nav class='navbar' id='navbar'>
+    <div class='navbar-container'>
+      <div class='navbar-logo'>
+        <img src={mainLogo.src} alt='CALMA Logo' class='navbar-logo-img' />
+        <span class='navbar-brand'>CALMA</span>
+      </div>
+
+      <button class='navbar-toggle' id='navbarToggle' aria-label='Toggle menu'>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+      </button>
+
+      <div class='navbar-menu' id='navbarMenu'>
+        <a href='/' class='navbar-link'>← Volver al inicio</a>
+        <a href='/ubicacion' class='navbar-link'>Ubicación</a>
+        <a href='/#inscripcion' class='navbar-link navbar-cta'>Inscríbete</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class='faq-page'>
+    <!-- Hero Header -->
+    <section class='faq-hero'>
+      <div class='container'>
+        <h1 class='page-title fade-in'>Preguntas Frecuentes</h1>
+        <p class='page-subtitle fade-in-delay'>
+          Todo lo que necesitas saber sobre el retiro CALMA
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class='faq-section'>
+      <div class='container'>
+        <div class='faq-list'>
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Necesito experiencia previa?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                No. Todo está guiado paso a paso. Este retiro está diseñado
+                tanto para personas que nunca han participado en procesos
+                terapéuticos grupales como para quienes ya tienen experiencia en
+                trabajo personal. Cada actividad incluye instrucciones claras y
+                acompañamiento profesional.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Puedo ir sola?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                Sí, la mayoría va sola. Es un espacio seguro y acompañado. De
+                hecho, venir sola puede ser una hermosa oportunidad para
+                enfocarte completamente en ti misma sin distracciones. Muchas
+                participantes han creado conexiones profundas durante el retiro.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Qué incluye el retiro?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>El retiro incluye:</p>
+              <ul>
+                <li>Todas las actividades terapéuticas y espirituales</li>
+                <li>Terapias energéticas y corporales</li>
+                <li>Alojamiento durante los 3 días</li>
+                <li>Todos los alimentos (desayuno, almuerzo, cena y snacks)</li>
+                <li>Materiales para las actividades</li>
+                <li>Acceso a las instalaciones y espacios naturales</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Qué no incluye?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                El retiro no incluye el transporte hacia y desde el lugar. Sin
+                embargo, te proporcionaremos información detallada sobre cómo
+                llegar y opciones de transporte compartido con otros
+                participantes.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'
+                >¿Qué tan profundo es el trabajo emocional?</span
+              >
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                Muy profundo pero siempre sostenido y seguro. Trabajamos con
+                técnicas profesionales de psicología clínica combinadas con
+                prácticas espirituales. El espacio está cuidadosamente diseñado
+                para que puedas explorar tus emociones a tu propio ritmo, con el
+                acompañamiento constante de la Dra. Alejandra y su equipo.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Hay límite de cupos?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                Sí, máximo 20 personas. Este límite nos permite mantener un
+                ambiente íntimo y personalizado donde cada participante recibe
+                atención adecuada y el grupo puede crear vínculos genuinos.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'
+                >¿Puedo asistir si vivo ansiedad o estoy en ruptura?</span
+              >
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                Sí, este retiro es ideal para ese momento. CALMA fue creado
+                específicamente para personas que atraviesan momentos difíciles
+                como ansiedad, rupturas, duelos o transiciones vitales. El
+                entorno terapéutico y el apoyo profesional te ayudarán a
+                procesar estas experiencias de manera saludable.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Qué debo llevar?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>Te recomendamos traer:</p>
+              <ul>
+                <li>Ropa cómoda para actividades de movimiento</li>
+                <li>Tenis o calzado deportivo</li>
+                <li>Vestido de baño (hay actividades acuáticas)</li>
+                <li>Journal o libreta personal</li>
+                <li>Botella de agua reutilizable</li>
+                <li>Ropa abrigadora para las noches</li>
+                <li>Artículos personales de higiene</li>
+                <li>Cualquier medicamento personal que necesites</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Habrá terapias individuales?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                Algunas terapias energéticas se realizan en pequeños grupos o
+                individualmente. Si bien el formato principal es grupal, hay
+                momentos de atención personalizada y espacios para reflexión
+                individual. Si necesitas atención terapéutica específica, por
+                favor contáctanos antes del retiro.
+              </p>
+            </div>
+          </div>
+
+          <div class='faq-accordion'>
+            <button class='faq-question' aria-expanded='false'>
+              <span class='question-text'>¿Cómo sé si es para mí?</span>
+              <span class='accordion-icon'>+</span>
+            </button>
+            <div class='faq-answer'>
+              <p>
+                Si buscas calma, claridad y soltar lo que te pesa, es para ti.
+                Este retiro es ideal si:
+              </p>
+              <ul>
+                <li>
+                  Sientes que necesitas una pausa del ritmo acelerado de la vida
+                </li>
+                <li>Quieres reconectar contigo misma</li>
+                <li>Buscas herramientas para manejar la ansiedad</li>
+                <li>Estás atravesando un proceso de cambio o sanación</li>
+                <li>Deseas reencontrarte con tu paz interior</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class='faq-cta'>
+      <div class='container'>
+        <h2 class='cta-title'>¿Todavía tienes preguntas?</h2>
+        <p class='cta-text'>
+          Estamos aquí para ayudarte. Contáctanos directamente y con gusto
+          resolveremos todas tus dudas.
+        </p>
+        <div class='cta-buttons'>
+          <a href='mailto:contacto@dra-ruiz.com' class='cta-button primary'>
+            Escríbenos
+          </a>
+          <a href='/#inscripcion' class='cta-button secondary'>
+            Reserva tu Espacio
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Navbar Styles */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.25rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .navbar-logo:hover {
+    opacity: 0.8;
+  }
+
+  .navbar-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .navbar-brand {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+  }
+
+  .navbar-menu {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .navbar-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .navbar-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #c9a961;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-link:hover {
+    color: #ffffff;
+  }
+
+  .navbar-link:hover::after {
+    width: 100%;
+  }
+
+  .navbar-cta {
+    background: rgba(201, 169, 97, 0.15);
+    color: #c9a961 !important;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0;
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  .navbar-cta::after {
+    display: none;
+  }
+
+  .navbar-cta:hover {
+    background: rgba(201, 169, 97, 0.25);
+    border-color: rgba(201, 169, 97, 0.5);
+    transform: none;
+  }
+
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .hamburger-line {
+    width: 25px;
+    height: 1px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  /* Main Content */
+  .faq-page {
+    min-height: 100vh;
+    background: #0a0a0f;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .faq-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at 20% 30%,
+        rgba(201, 169, 97, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 70%,
+        rgba(45, 67, 86, 0.08) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .faq-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7) contrast(1.1);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 15, 0.7) 0%,
+      rgba(10, 10, 15, 0.5) 50%,
+      rgba(10, 10, 15, 0.9) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 4rem;
+  }
+
+  .page-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .page-subtitle {
+    font-family: "Inter", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+    animation: fadeInUp 1s ease-out 0.4s backwards;
+  }
+
+  .scroll-indicator span {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .arrow-down {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(
+      to bottom,
+      rgba(201, 169, 97, 0.6),
+      transparent
+    );
+    animation: arrowBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes arrowBounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.5;
+    }
+  }
+
+  .faq-section {
+    padding: 4rem 4rem 8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .faq-accordion {
+    background: rgba(15, 15, 20, 0.6);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .faq-accordion::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #c9a961, transparent);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .faq-accordion:hover::before,
+  .faq-accordion.active::before {
+    opacity: 1;
+  }
+
+  .faq-accordion:hover {
+    border-color: rgba(201, 169, 97, 0.2);
+  }
+
+  .faq-accordion.active {
+    border-color: rgba(201, 169, 97, 0.3);
+    background: rgba(15, 15, 20, 0.8);
+  }
+
+  .faq-question {
+    width: 100%;
+    padding: 2rem 3rem;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Cormorant Garamond", serif;
+    text-align: left;
+  }
+
+  .faq-question:hover {
+    background: rgba(201, 169, 97, 0.03);
+  }
+
+  .question-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    flex: 1;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+  }
+
+  .accordion-icon {
+    font-size: 2rem;
+    color: rgba(201, 169, 97, 0.7);
+    font-weight: 300;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    margin-left: 2rem;
+    width: 30px;
+    text-align: center;
+  }
+
+  .faq-accordion.active .accordion-icon {
+    transform: rotate(45deg);
+    color: #c9a961;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.6s ease;
+    padding: 0 3rem;
+  }
+
+  .faq-accordion.active .faq-answer {
+    max-height: 1000px;
+    padding: 0 3rem 2rem;
+  }
+
+  .faq-answer p {
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.9;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  .faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-answer ul {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .faq-answer li {
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* CTA Section */
+  .faq-cta {
+    padding: 6rem 4rem;
+    background: transparent;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 4rem;
+  }
+
+  .faq-cta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(201, 169, 97, 0.3),
+      transparent
+    );
+  }
+
+  .cta-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-text {
+    font-family: "Inter", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.9;
+    letter-spacing: 0.01em;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    font-family: "Inter", sans-serif;
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .cta-button.primary {
+    background: rgba(201, 169, 97, 0.95);
+    color: #0a0a0f;
+    border-color: #c9a961;
+  }
+
+  .cta-button.primary:hover {
+    background: #c9a961;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201, 169, 97, 0.3);
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .fade-in-delay {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .navbar-container {
+      padding: 1.25rem 3rem;
+    }
+
+    .faq-hero,
+    .faq-section,
+    .faq-cta {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 1rem 1.5rem;
+    }
+
+    .navbar-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 15, 0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      padding: 1.5rem;
+      gap: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar-menu.active {
+      display: flex;
+    }
+
+    .navbar-toggle {
+      display: flex;
+    }
+
+    .faq-hero {
+      padding: 10rem 1.5rem 4rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+    }
+
+    .faq-section {
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .faq-question {
+      padding: 1.5rem 1.5rem;
+    }
+
+    .question-text {
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+
+    .accordion-icon {
+      margin-left: 1rem;
+      font-size: 1.75rem;
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem;
+    }
+
+    .faq-accordion.active .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    .faq-cta {
+      padding: 4rem 1.5rem;
+    }
+
+    .cta-title {
+      font-size: 1.75rem;
+    }
+
+    .cta-text {
+      font-size: 1rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 1rem 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const navbarToggle = document.getElementById("navbarToggle");
+  const navbarMenu = document.getElementById("navbarMenu");
+
+  navbarToggle?.addEventListener("click", () => {
+    navbarMenu?.classList.toggle("active");
+  });
+
+  // Close menu when clicking a link
+  const navbarLinks = document.querySelectorAll(".navbar-link");
+  navbarLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navbarMenu?.classList.remove("active");
+    });
+  });
+
+  // Accordion functionality
+  const accordions = document.querySelectorAll(".faq-accordion");
+
+  accordions.forEach((accordion) => {
+    const button = accordion.querySelector(".faq-question");
+
+    button?.addEventListener("click", () => {
+      const isActive = accordion.classList.contains("active");
+
+      // Close all accordions
+      accordions.forEach((item) => {
+        item.classList.remove("active");
+        item
+          .querySelector(".faq-question")
+          ?.setAttribute("aria-expanded", "false");
+      });
+
+      // Open clicked accordion if it wasn't active
+      if (!isActive) {
+        accordion.classList.add("active");
+        button.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+</script>

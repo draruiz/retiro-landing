@@ -1,0 +1,342 @@
+---
+
+---
+
+<div id='accommodation-modal' class='modal-backdrop' aria-hidden='true'>
+  <div class='modal-container'>
+    <button id='close-modal' class='close-btn' aria-label='Cerrar'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='1'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        ><line x1='18' y1='6' x2='6' y2='18'></line><line
+          x1='6'
+          y1='6'
+          x2='18'
+          y2='18'></line></svg
+      >
+    </button>
+
+    <div class='modal-content'>
+      <div class='modal-gallery'>
+        <div class='main-image-container'>
+          <img id='modal-main-image' src='' alt='' class='main-image' />
+        </div>
+        <div class='thumbnails' id='modal-thumbnails'>
+          <!-- Thumbnails will be injected here -->
+        </div>
+      </div>
+
+      <div class='modal-info'>
+        <div class='modal-header'>
+          <span id='modal-category' class='category-label'></span>
+          <h2 id='modal-title' class='modal-title'></h2>
+        </div>
+
+        <div class='modal-body'>
+          <p id='modal-description' class='description'></p>
+
+          <div class='amenities-section'>
+            <h3 class='section-title'>Comodidades</h3>
+            <ul id='modal-amenities' class='amenities-list'>
+              <!-- Amenities will be injected here -->
+            </ul>
+          </div>
+        </div>
+
+        <div class='modal-footer'>
+          <div class='price-block'>
+            <span id='modal-price-label' class='price-label'></span>
+            <span id='modal-price' class='price-amount'></span>
+          </div>
+          <a href='/#inscripcion' class='book-btn'>Reservar Ahora</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 2rem;
+  }
+
+  .modal-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-container {
+    background: #0f0f13;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+  }
+
+  .modal-backdrop.active .modal-container {
+    transform: translateY(0);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+  }
+
+  .close-btn:hover {
+    background: #c9a961;
+    color: #0a0a0f;
+    border-color: #c9a961;
+  }
+
+  .modal-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Gallery Styles */
+  .modal-gallery {
+    background: #050508;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .main-image-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+
+  .thumbnails {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+
+  .thumbnail {
+    aspect-ratio: 4/3;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .thumbnail:hover,
+  .thumbnail.active {
+    opacity: 1;
+    border-color: #c9a961;
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Info Styles */
+  .modal-info {
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(to bottom right, #0f0f13, #15151a);
+  }
+
+  .category-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    color: #c9a961;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .modal-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+
+  .description {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  .amenities-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .amenities-list li {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .modal-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .price-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .price-amount {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    color: #c9a961;
+  }
+
+  .book-btn {
+    background: #c9a961;
+    color: #0a0a0f;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+  }
+
+  .book-btn:hover {
+    background: #e0c47e;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .modal-backdrop {
+      padding: 0;
+      align-items: flex-start;
+    }
+
+    .modal-container {
+      max-height: 100vh;
+      height: 100vh;
+      overflow-y: auto;
+      flex-direction: column;
+      border-radius: 0;
+    }
+
+    .modal-content {
+      grid-template-columns: 1fr;
+      overflow-y: visible;
+    }
+
+    .modal-gallery {
+      height: auto;
+      padding: 1rem;
+      overflow-y: visible;
+    }
+
+    .modal-info {
+      padding: 2rem 1.5rem;
+      height: auto;
+      overflow-y: visible;
+    }
+
+    .close-btn {
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+    }
+  }
+</style>

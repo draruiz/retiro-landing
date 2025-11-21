@@ -1,11 +1,3644 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import backgroundStars from "../assets/backgorund.png";
+import mainLogo from "../assets/main_logo_brain.png";
+import docAlejandra from "../assets/doc_alejandra-perfil_whatsapp.jpeg";
+import LocationShowcase from "../components/LocationShowcase.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Navbar -->
+  <nav class='navbar' id='navbar'>
+    <div class='navbar-container'>
+      <div class='navbar-logo'>
+        <img src={mainLogo.src} alt='CALMA Logo' class='navbar-logo-img' />
+        <span class='navbar-brand'>CALMA</span>
+      </div>
+
+      <button class='navbar-toggle' id='navbarToggle' aria-label='Toggle menu'>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+      </button>
+
+      <div class='navbar-menu' id='navbarMenu'>
+        <a href='#inicio' class='navbar-link'>Inicio</a>
+        <a href='#proposito' class='navbar-link'>Propósito</a>
+        <a href='#actividades' class='navbar-link'>Actividades</a>
+        <a href='#itinerario' class='navbar-link'>Itinerario</a>
+        <a href='/ubicacion' class='navbar-link'>Ubicación</a>
+        <a href='/faq' class='navbar-link'>FAQ</a>
+        <a href='#inscripcion' class='navbar-link navbar-cta'>Inscríbete</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class='retiro-landing'>
+    <!-- Hero Section -->
+    <section class='hero' id='inicio'>
+      <div class='hero-bg-wrapper'>
+        <div
+          class='hero-bg'
+          id='hero-bg'
+          style={`background-image: url(${backgroundStars.src})`}
+        >
+          <div class='hero-overlay'></div>
+        </div>
+      </div>
+      <div class='container hero-content'>
+        <div class='logo-perspective'>
+          <div class='logo-container' id='logo-container'>
+            <div class='logo-glow'></div>
+            <img src={mainLogo.src} alt='CALMA Logo' class='main-logo' />
+          </div>
+        </div>
+        <h1 class='hero-title'>
+          <span class='reveal-wrapper'>
+            <span class='title-main reveal-text'>CALMA</span>
+          </span>
+          <span class='reveal-wrapper'>
+            <span class='title-subtitle reveal-text delay-1'>
+              El Retiro para Soltar y Renacer
+            </span>
+          </span>
+        </h1>
+        <div class='description-wrapper'>
+          <p class='hero-description reveal-opacity delay-2'>
+            Un encuentro para soltar lo que pesa y volver a habitar<br />tu alma
+            en calma.
+          </p>
+        </div>
+        <div class='hero-dates reveal-opacity delay-3'>
+          <span class='date-badge'>📅 Mayo, 2026</span>
+        </div>
+        <div class='cta-wrapper reveal-opacity delay-4'>
+          <a href='#inscripcion' class='cta-button'>Reserva tu Espacio</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.querySelector(".hero");
+        const logoContainer = document.getElementById("logo-container");
+        const heroBg = document.getElementById("hero-bg");
+
+        if (hero && logoContainer) {
+          hero.addEventListener("mousemove", (e) => {
+            // Cast event to any to access clientX/Y without TS errors
+            const mouseEvent = e;
+            const { left, top, width, height } = hero.getBoundingClientRect();
+            const x = (mouseEvent.clientX - left) / width - 0.5;
+            const y = (mouseEvent.clientY - top) / height - 0.5;
+
+            // Tilt effect for logo
+            const tiltX = y * 20; // Max rotation deg
+            const tiltY = -x * 20;
+
+            logoContainer.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
+
+            // Subtle parallax for background
+            if (heroBg) {
+              heroBg.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
+            }
+          });
+
+          hero.addEventListener("mouseleave", () => {
+            logoContainer.style.transform =
+              "rotateX(0deg) rotateY(0deg) scale(1)";
+            if (heroBg) {
+              heroBg.style.transform = "scale(1.1) translate(0, 0)";
+            }
+          });
+        }
+
+        // Scroll Parallax
+        window.addEventListener("scroll", () => {
+          const scrolled = window.scrollY;
+          if (heroBg && scrolled < window.innerHeight) {
+            heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+          }
+        });
+      });
+    </script>
+
+    <!-- Location Showcase Section -->
+    <LocationShowcase />
+
+    <!-- Propósito Section -->
+    <section class='purpose-section' id='proposito'>
+      <div class='container'>
+        <div class='section-header'>
+          <h2 class='section-title'>La pausa que tu alma estaba pidiendo</h2>
+          <div class='title-underline'></div>
+        </div>
+        <div class='purpose-content'>
+          <div class='purpose-card float-animation'>
+            <div class='card-icon'>🕊️</div>
+            <p class='purpose-text'>
+              Este retiro nace para quienes necesitan un respiro, un lugar donde
+              por fin puedan
+              <strong>soltar la angustia</strong>, apagar el ruido mental y
+              volver a sentirse en paz.
+            </p>
+          </div>
+          <div class='purpose-card float-animation-delay'>
+            <div class='card-icon'>🌿</div>
+            <p class='purpose-text'>
+              En CALMA aprenderás a reencontrarte con tu tranquilidad interior,
+              a manejar pensamientos obsesivos y ansiedad, a sanar tus heridas
+              más profundas y a reencontrarte con la alegría que habita dentro
+              de ti… incluso si llevas tiempo sin sentirla.
+            </p>
+          </div>
+          <div class='purpose-card float-animation'>
+            <div class='card-icon'>✨</div>
+            <p class='purpose-text'>
+              Es un <strong>regalo para tu mente</strong>. Un descanso para tu
+              alma. Un renacer para tu vida.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qué es CALMA Section -->
+    <section class='facilitator-section'>
+      <div class='container'>
+        <div
+          class='section-header'
+          style='text-align: center; margin-bottom: 3rem;'
+        >
+          <h2 class='section-title' style='color: white;'>¿Qué es CALMA?</h2>
+          <div
+            class='title-underline'
+            style='background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(201,169,97,0.8));'
+          >
+          </div>
+        </div>
+        <div class='facilitator-content'>
+          <div class='facilitator-image'>
+            <img
+              src={docAlejandra.src}
+              alt='Dra. María Alejandra Ruiz'
+              class='doctor-photo'
+            />
+          </div>
+          <div class='facilitator-info'>
+            <h3 class='facilitator-label'>Creado y dirigido por</h3>
+            <h2 class='facilitator-name'>Dra. María Alejandra Ruiz</h2>
+            <p class='facilitator-title'>Psicóloga Clínica</p>
+            <p class='facilitator-description'>
+              Autora del libro <em
+                >'El niño que fui y el adulto que elijo ser'</em
+              >.
+            </p>
+            <p class='facilitator-description' style='margin-top: 1rem;'>
+              Un retiro terapéutico–espiritual que combina <strong
+                >psicología, espiritualidad y naturaleza</strong
+              >. Durante tres días vivirás una experiencia transformadora que
+              integra ciencia y consciencia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enfoque Section -->
+    <section class='investment-section'>
+      <div class='container'>
+        <div class='approach-grid'>
+          <div class='approach-column'>
+            <h3 class='approach-title'>🧠 Psicología basada en evidencia</h3>
+            <ul class='approach-list'>
+              <li>Terapia Cognitivo-Conductual</li>
+              <li>DBT (Terapia Dialéctico Conductual)</li>
+              <li>Regulación emocional</li>
+              <li>Reestructuración de pensamientos</li>
+              <li>Trabajo profundo de heridas de rechazo y abandono</li>
+              <li>Roleplay y ejercicios vivenciales</li>
+            </ul>
+          </div>
+          <div class='approach-column'>
+            <h3 class='approach-title'>
+              🌸 Prácticas holísticas y de conexión interior
+            </h3>
+            <ul class='approach-list'>
+              <li>Ritual Guardián del Agua</li>
+              <li>Conexión con la naturaleza</li>
+              <li>Masajes con piedras volcánicas</li>
+              <li>Reiki y alineación de chakras</li>
+              <li>Terapia floral y de sonido con cuencos</li>
+              <li>Caminata meditativa en el bosque</li>
+              <li>Fogata y ritual de liberación</li>
+              <li>Noche de alegría y chirimía</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Para Quién Section -->
+    <section class='experience-section'>
+      <div class='container'>
+        <div class='section-header'>
+          <h2 class='section-title'>¿Para quién es este retiro?</h2>
+          <div class='title-underline'></div>
+        </div>
+        <div class='experience-grid'>
+          <div class='experience-item'>
+            <div class='experience-icon'>😰</div>
+            <h3>Ansiedad y sobrecarga mental</h3>
+            <p>
+              Personas con ansiedad, angustia o mente hiperactiva que necesitan
+              paz.
+            </p>
+          </div>
+          <div class='experience-item'>
+            <div class='experience-icon'>💔</div>
+            <h3>Rupturas y duelos</h3>
+            <p>
+              Quienes están pasando por separaciones, pérdidas o vínculos
+              confusos.
+            </p>
+          </div>
+          <div class='experience-item'>
+            <div class='experience-icon'>🌪️</div>
+            <h3>Necesidad de descanso</h3>
+            <p>Quienes necesitan un respiro del ruido externo e interno.</p>
+          </div>
+          <div class='experience-item'>
+            <div class='experience-icon'>💚</div>
+            <h3>Heridas emocionales</h3>
+            <p>Personas con heridas de rechazo y abandono que desean sanar.</p>
+          </div>
+          <div class='experience-item'>
+            <div class='experience-icon'>🦋</div>
+            <h3>Reconexión interior</h3>
+            <p>Quienes desean reconectar con su alegría, calma y centro.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actividades Principales Section -->
+    <section class='activities-section' id='actividades'>
+      <div class='container'>
+        <div class='section-header'>
+          <h2 class='section-title'>Actividades Principales</h2>
+          <div class='title-underline'></div>
+        </div>
+        <div class='activities-grid'>
+          <div class='activity-card'>
+            <div class='activity-icon'>💧</div>
+            <h3>Ritual Guardián del Agua</h3>
+            <p>
+              Purificación y descarga emocional en una cascada natural con
+              aromaterapia y elementos rituales.
+            </p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>🌲</div>
+            <h3>Escuchar el Bosque Interior</h3>
+            <p>
+              Caminata meditativa guiada por la historia del Guardián del
+              Bosque.
+            </p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>💫</div>
+            <h3>Taller profundo de heridas emocionales</h3>
+            <p>Trabajo intensivo con ejercicios vivenciales y roleplay.</p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>🪨</div>
+            <h3>Masajes con piedras volcánicas</h3>
+            <p>Liberación de tensión física y emocional.</p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>⚡</div>
+            <h3>Reiki y Alineación de Chakras</h3>
+            <p>Equilibrio energético profundo.</p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>🌺</div>
+            <h3>Terapia floral</h3>
+            <p>Armonización emocional complementaria.</p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>🔔</div>
+            <h3>Terapia de sonido con cuencos</h3>
+            <p>Vibración para calmar el sistema nervioso.</p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>🔥</div>
+            <h3>Chocolatada y Fogata del Alma</h3>
+            <p>Espacio íntimo de apertura y liberación.</p>
+          </div>
+          <div class='activity-card'>
+            <div class='activity-icon'>🎶</div>
+            <h3>Noche de Alegría y Chirimía</h3>
+            <p>Movimiento, baile y reconexión con la alegría.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class='cta-mini-section'>
+      <div class='container'>
+        <div class='cta-mini-content'>
+          <h2 class='cta-mini-title'>¿Dónde te hospedarás?</h2>
+          <p class='cta-mini-text'>
+            Descubre las hermosas y cómodas instalaciones donde vivirás esta
+            experiencia transformadora.
+          </p>
+          <a href='/acomodaciones' class='cta-mini-button'>
+            Ver Acomodaciones
+            <span class='arrow'>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Itinerario Section -->
+    <section class='itinerary-section' id='itinerario'>
+      <div class='container'>
+        <div class='section-header'>
+          <h2 class='section-title'>Itinerario</h2>
+          <div class='title-underline'></div>
+        </div>
+
+        <div class='itinerary-timeline'>
+          <!-- Día 1 -->
+          <div class='day-card'>
+            <div class='day-header'>
+              <span class='day-number'>Día 1</span>
+              <h3 class='day-title'>Viernes — Renacimiento</h3>
+              <p class='day-theme'>12:00 p.m. – 8:00 p.m.</p>
+            </div>
+            <div class='day-activities'>
+              <div class='activity'>
+                <span class='time'>12:00 p.m.</span>
+                <div class='activity-content'>
+                  <h4>Almuerzo de Bienvenida</h4>
+                  <p>Comida consciente y presentación del grupo</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Tarde</span>
+                <div class='activity-content'>
+                  <h4>Ritual Guardián del Agua</h4>
+                  <p>Purificación y descarga emocional en cascada natural</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Tarde</span>
+                <div class='activity-content'>
+                  <h4>Masajes con Piedras Volcánicas y Reiki</h4>
+                  <p>Liberación de tensión física y equilibrio energético</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Tarde</span>
+                <div class='activity-content'>
+                  <h4>Terapia Floral</h4>
+                  <p>Armonización emocional complementaria</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Noche</span>
+                <div class='activity-content'>
+                  <h4>Cena y Círculo de Apertura</h4>
+                  <p>Compartir intenciones y bienvenida al proceso</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Día 2 -->
+          <div class='day-card'>
+            <div class='day-header'>
+              <span class='day-number'>Día 2</span>
+              <h3 class='day-title'>Sábado — Escuchar el Alma</h3>
+              <p class='day-theme'>7:30 a.m. – 10:00 p.m.</p>
+            </div>
+            <div class='day-activities'>
+              <div class='activity'>
+                <span class='time'>7:30 a.m.</span>
+                <div class='activity-content'>
+                  <h4>Yoga y Respiración Consciente</h4>
+                  <p>Movimiento suave para relajar el sistema nervioso</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Mañana</span>
+                <div class='activity-content'>
+                  <h4>Escuchar el Bosque Interior</h4>
+                  <p>Caminata meditativa guiada por la historia del Guardián</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Mediodía</span>
+                <div class='activity-content'>
+                  <h4>Alineación de Chakras</h4>
+                  <p>Equilibrio energético profundo</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Tarde</span>
+                <div class='activity-content'>
+                  <h4>Taller Profundo de Heridas</h4>
+                  <p>
+                    Abandono y rechazo con ejercicios vivenciales y roleplay
+                  </p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Atardecer</span>
+                <div class='activity-content'>
+                  <h4>Terapia de Sonido</h4>
+                  <p>Cuencos tibetanos - vibración sanadora</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>8:00 p.m.</span>
+                <div class='activity-content'>
+                  <h4>Chocolatada y Fogata del Alma</h4>
+                  <p>Espacio íntimo de apertura y liberación</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>Noche</span>
+                <div class='activity-content'>
+                  <h4>Noche de Alegría y Chirimía</h4>
+                  <p>Música, baile y reconexión con la alegría</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Día 3 -->
+          <div class='day-card'>
+            <div class='day-header'>
+              <span class='day-number'>Día 3</span>
+              <h3 class='day-title'>Domingo — Integración</h3>
+              <p class='day-theme'>8:00 a.m. – 12:00 p.m.</p>
+            </div>
+            <div class='day-activities'>
+              <div class='activity'>
+                <span class='time'>8:00 a.m.</span>
+                <div class='activity-content'>
+                  <h4>Meditación: Soy Calma</h4>
+                  <p>Integración corporal y emocional de todo lo vivido</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>9:00 a.m.</span>
+                <div class='activity-content'>
+                  <h4>Desayuno Final</h4>
+                  <p>Última comida en comunidad</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>10:00 a.m.</span>
+                <div class='activity-content'>
+                  <h4>Círculo de Cierre y Entrega de Amuleto</h4>
+                  <p>Agradecimiento, reflexión y cierre ceremonial</p>
+                </div>
+              </div>
+              <div class='activity'>
+                <span class='time'>12:00 p.m.</span>
+                <div class='activity-content'>
+                  <h4>Despedida</h4>
+                  <p>Hasta pronto, llevas la calma contigo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class='testimonials-section'>
+      <div class='testimonials-bg'>
+        <div class='floating-orb orb-1'></div>
+        <div class='floating-orb orb-2'></div>
+        <div class='floating-orb orb-3'></div>
+      </div>
+
+      <div class='container'>
+        <div class='testimonials-header'>
+          <span class='testimonial-label'>Historias de Transformación</span>
+          <h2 class='testimonials-title'>
+            Voces que han renacido en DÉSATAME (2025)
+          </h2>
+          <p class='testimonials-subtitle'>
+            Experiencias reales de quienes han vivido el viaje
+          </p>
+        </div>
+
+        <!-- Video Testimonials -->
+        <div class='video-testimonials'>
+          <div class='video-card video-featured'>
+            <div class='video-wrapper'>
+              <iframe
+                src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/dc24425be20e5a7aae55bf2f67d41da3/iframe'
+                style='border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;'
+                allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;'
+                allowfullscreen='true'></iframe>
+            </div>
+            <div class='video-overlay'>
+              <span class='video-badge'>✨ Testimonio Destacado</span>
+            </div>
+          </div>
+
+          <div class='video-grid'>
+            <div class='video-card video-small'>
+              <div class='video-wrapper'>
+                <iframe
+                  src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/dc24425be20e5a7aae55bf2f67d41da3/iframe'
+                  style='border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;'
+                  allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;'
+                  allowfullscreen='true'></iframe>
+              </div>
+            </div>
+            <div class='video-card video-small'>
+              <div class='video-wrapper'>
+                <iframe
+                  src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/dc24425be20e5a7aae55bf2f67d41da3/iframe'
+                  style='border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;'
+                  allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;'
+                  allowfullscreen='true'></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Testimonials -->
+        <div class='text-testimonials'>
+          <div class='testimonial-card testimonial-1'>
+            <div class='quote-icon'>"</div>
+            <div class='testimonial-content'>
+              <p class='testimonial-text'>
+                Llegué a CALMA con el corazón roto y la mente llena de ruido. En
+                tres días logré lo que meses de terapia no habían conseguido.
+                Encontré mi paz interior y aprendí a sostenerme en mi propia
+                calma. Este retiro cambió mi vida.
+              </p>
+              <div class='testimonial-author'>
+                <div class='author-avatar'>M</div>
+                <div class='author-info'>
+                  <h4 class='author-name'>María Fernanda</h4>
+                  <p class='author-location'>Bogotá, Colombia</p>
+                </div>
+              </div>
+            </div>
+            <div class='testimonial-glow'></div>
+          </div>
+
+          <div class='testimonial-card testimonial-2'>
+            <div class='quote-icon'>"</div>
+            <div class='testimonial-content'>
+              <p class='testimonial-text'>
+                Nunca había experimentado algo tan profundo. El ritual del agua
+                en la cascada, el trabajo con mis heridas de abandono, la
+                conexión con el bosque... Cada momento fue sanador. Volví a casa
+                siendo una versión más completa de mí misma.
+              </p>
+              <div class='testimonial-author'>
+                <div class='author-avatar'>S</div>
+                <div class='author-info'>
+                  <h4 class='author-name'>Sofía Jiménez</h4>
+                  <p class='author-location'>Medellín, Colombia</p>
+                </div>
+              </div>
+            </div>
+            <div class='testimonial-glow'></div>
+          </div>
+
+          <div class='testimonial-card testimonial-3'>
+            <div class='quote-icon'>"</div>
+            <div class='testimonial-content'>
+              <p class='testimonial-text'>
+                La Dra. Alejandra tiene un don especial para crear espacios
+                seguros. Logré soltar traumas que llevaba años cargando. Las
+                herramientas que aprendí las uso todos los días. CALMA no es
+                solo un retiro, es un renacimiento.
+              </p>
+              <div class='testimonial-author'>
+                <div class='author-avatar'>C</div>
+                <div class='author-info'>
+                  <h4 class='author-name'>Carolina Restrepo</h4>
+                  <p class='author-location'>Cali, Colombia</p>
+                </div>
+              </div>
+            </div>
+            <div class='testimonial-glow'></div>
+          </div>
+
+          <div class='testimonial-card testimonial-4'>
+            <div class='quote-icon'>"</div>
+            <div class='testimonial-content'>
+              <p class='testimonial-text'>
+                Llegué con ansiedad crónica y patrones de pensamiento obsesivos.
+                El enfoque que combina psicología científica con prácticas
+                espirituales fue exactamente lo que necesitaba. Ahora sé cómo
+                calmar mi mente y volver a mi centro.
+              </p>
+              <div class='testimonial-author'>
+                <div class='author-avatar'>L</div>
+                <div class='author-info'>
+                  <h4 class='author-name'>Laura Martínez</h4>
+                  <p class='author-location'>Cartagena, Colombia</p>
+                </div>
+              </div>
+            </div>
+            <div class='testimonial-glow'></div>
+          </div>
+
+          <div class='testimonial-card testimonial-5'>
+            <div class='quote-icon'>"</div>
+            <div class='testimonial-content'>
+              <p class='testimonial-text'>
+                El lugar es mágico, pero lo que realmente transforma es la
+                experiencia completa. Cada actividad está diseñada con tanto
+                amor y profesionalismo. Salí del retiro sintiendo que había
+                recuperado mi alegría de vivir. Gracias infinitas.
+              </p>
+              <div class='testimonial-author'>
+                <div class='author-avatar'>A</div>
+                <div class='author-info'>
+                  <h4 class='author-name'>Andrea López</h4>
+                  <p class='author-location'>Bucaramanga, Colombia</p>
+                </div>
+              </div>
+            </div>
+            <div class='testimonial-glow'></div>
+          </div>
+
+          <div class='testimonial-card testimonial-6'>
+            <div class='quote-icon'>"</div>
+            <div class='testimonial-content'>
+              <p class='testimonial-text'>
+                Después de una ruptura difícil, pensé que nunca volvería a
+                sentirme bien. CALMA me dio las herramientas para sanar,
+                perdonar y sobre todo, para reconectarme con mi propia esencia.
+                Fue el mejor regalo que pude darme.
+              </p>
+              <div class='testimonial-author'>
+                <div class='author-avatar'>D</div>
+                <div class='author-info'>
+                  <h4 class='author-name'>Diana Vargas</h4>
+                  <p class='author-location'>Pereira, Colombia</p>
+                </div>
+              </div>
+            </div>
+            <div class='testimonial-glow'></div>
+          </div>
+        </div>
+
+        <div class='testimonials-cta'>
+          <p class='cta-text'>
+            ¿Lista para escribir tu propia historia de transformación?
+          </p>
+          <a href='#inscripcion' class='cta-button-testimonials'>
+            Reserva tu Espacio Ahora
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Por Qué Ir Section -->
+    <section class='why-attend-section'>
+      <div class='container'>
+        <div class='why-attend-header'>
+          <span class='decorative-line'></span>
+          <h2 class='why-attend-title'>¿Por qué ir a este retiro?</h2>
+          <span class='decorative-line'></span>
+        </div>
+
+        <div class='why-attend-grid'>
+          <div class='why-card card-1'>
+            <div class='card-number'>01</div>
+            <div class='card-content'>
+              <div class='card-icon-large'>🌟</div>
+              <p>
+                CALMA no es un retiro más; es una <strong
+                  >experiencia profunda y transformadora</strong
+                > diseñada para sanar desde la mente, el cuerpo y el alma.
+              </p>
+            </div>
+            <div class='card-glow'></div>
+          </div>
+
+          <div class='why-card card-2'>
+            <div class='card-number'>02</div>
+            <div class='card-content'>
+              <div class='card-icon-large'>⚖️</div>
+              <p>
+                La experiencia es completamente <strong>holística</strong>:
+                combina psicología basada en evidencia con prácticas
+                espirituales y energéticas que equilibran tu sistema interno.
+              </p>
+            </div>
+            <div class='card-glow'></div>
+          </div>
+
+          <div class='why-card card-3'>
+            <div class='card-number'>03</div>
+            <div class='card-content'>
+              <div class='card-icon-large'>👩‍⚕️</div>
+              <p>
+                Serás guiada directamente por la <strong
+                  >Dra. María Alejandra Ruiz</strong
+                >, psicóloga clínica reconocida internacionalmente, autora, y
+                especialista en heridas emocionales, ansiedad y vínculos.
+              </p>
+            </div>
+            <div class='card-glow'></div>
+          </div>
+
+          <div class='why-card card-4'>
+            <div class='card-number'>04</div>
+            <div class='card-content'>
+              <div class='card-icon-large'>🧬</div>
+              <p>
+                La mezcla entre lo <strong>científico y lo espiritual</strong> convierte
+                este retiro en una experiencia única donde la mente se calma y el
+                alma encuentra dirección.
+              </p>
+            </div>
+            <div class='card-glow'></div>
+          </div>
+
+          <div class='why-card card-5'>
+            <div class='card-number'>05</div>
+            <div class='card-content'>
+              <div class='card-icon-large'>🏞️</div>
+              <p>
+                La cascada privada, el bosque vivo y los <strong
+                  >espacios sagrados de Río de Oro</strong
+                > crean un escenario natural que potencia la sanación de forma imposible
+                de replicar en un retiro convencional.
+              </p>
+            </div>
+            <div class='card-glow'></div>
+          </div>
+
+          <div class='why-card card-6'>
+            <div class='card-number'>06</div>
+            <div class='card-content'>
+              <div class='card-icon-large'>✨</div>
+              <p>
+                Cada detalle de la logística está diseñado para que puedas <strong
+                  >relajarte por completo</strong
+                > sin estrés ni ansiedad; solo necesitas llegar y permitir que la
+                experiencia te sostenga y transforme.
+              </p>
+            </div>
+            <div class='card-glow'></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beneficios Section -->
+    <section class='message-section'>
+      <div class='container'>
+        <div class='section-header'>
+          <h2 class='section-title' style='color: white;'>
+            Beneficios del Retiro
+          </h2>
+          <div
+            class='title-underline'
+            style='background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(201,169,97,0.8));'
+          >
+          </div>
+        </div>
+        <div class='benefits-grid'>
+          <div class='benefit-item'>
+            ✨ Herramientas psicológicas para toda tu vida
+          </div>
+          <div class='benefit-item'>🧠 Claridad mental y emocional</div>
+          <div class='benefit-item'>
+            💚 Sanación profunda de patrones dolorosos
+          </div>
+          <div class='benefit-item'>
+            🦋 Reconexión con la alegría y el bienestar
+          </div>
+          <div class='benefit-item'>⚡ Renovación energética y emocional</div>
+          <div class='benefit-item'>🌟 Recuperación del equilibrio interno</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class='final-cta' id='inscripcion'>
+      <div class='container'>
+        <div class='cta-content'>
+          <h2 class='cta-title'>Tu Viaje hacia la Serenidad Comienza Aquí</h2>
+          <p class='cta-subtitle'>Plazas limitadas · Mayo 2026</p>
+          <a href='mailto:contacto@dra-ruiz.com' class='cta-button-large'>
+            Inscríbete Ahora
+          </a>
+          <p class='cta-note'>
+            Escríbenos para más información y reservar tu espacio
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+    :root {
+      --color-primary: #c9a961;
+      --color-secondary: #87ceeb;
+      --color-accent: #c9a961;
+      --color-dark: #0a0a0f;
+      --color-light: #f8f9fa;
+      --color-white: #ffffff;
+      --color-sage: #8b9d83;
+      --color-lavender: #b8a9c9;
+
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 2rem;
+      --spacing-lg: 4rem;
+      --spacing-xl: 6rem;
+
+      --font-primary: "Cormorant Garamond", serif;
+      --font-secondary: "Inter", sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    .retiro-landing {
+      font-family: var(--font-secondary);
+      background: var(--color-dark);
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 10, 15, 0.98);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar-logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .navbar-logo-img {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.3));
+    }
+
+    .navbar-brand {
+      font-family: var(--font-primary);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 2px;
+    }
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .navbar-link {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 300;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0.5rem 0;
+      letter-spacing: 0.5px;
+    }
+
+    .navbar-link::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #c9a961, transparent);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar-link:hover {
+      color: #c9a961;
+    }
+
+    .navbar-link:hover::after {
+      width: 100%;
+    }
+
+    .navbar-link.active {
+      color: #c9a961;
+    }
+
+    .navbar-link.active::after {
+      width: 100%;
+    }
+
+    .navbar-cta {
+      background: linear-gradient(135deg, #c9a961 0%, #b8944e 100%);
+      color: #0a0a0f;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      border: 1px solid #c9a961;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+
+    .navbar-cta:hover::before {
+      left: 100%;
+    }
+
+    .navbar-cta::after {
+      display: none;
+    }
+
+    .navbar-cta:hover {
+      background: linear-gradient(135deg, #d4b66d 0%, #c9a961 100%);
+      color: #0a0a0f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201, 169, 97, 0.4);
+    }
+
+    .navbar-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      gap: 5px;
+    }
+
+    .hamburger-line {
+      width: 25px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-toggle.active .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .navbar-toggle.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar-toggle.active .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.95);
+      overflow: hidden;
+      perspective: 1000px;
+    }
+
+    .hero-bg-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: brightness(0.85) contrast(1.1);
+      transform: scale(1.1); /* Initial zoom for parallax room */
+      transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        circle at center,
+        rgba(10, 10, 15, 0.3) 0%,
+        rgba(10, 10, 15, 0.8) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 8rem var(--spacing-md) var(--spacing-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Logo 3D Effect */
+    .logo-perspective {
+      perspective: 1000px;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-container {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+
+    .main-logo {
+      width: clamp(120px, 18vw, 160px);
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(201, 169, 97, 0.3));
+      transform: translateZ(20px);
+      animation: floatLogo 6s ease-in-out infinite;
+    }
+
+    .logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateZ(-10px);
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.4) 0%,
+        transparent 70%
+      );
+      opacity: 0.6;
+      filter: blur(20px);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) translateZ(-10px) scale(0.9);
+      }
+      50% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) translateZ(-10px) scale(1.1);
+      }
+    }
+
+    @keyframes floatLogo {
+      0%,
+      100% {
+        transform: translateZ(20px) translateY(0);
+      }
+      50% {
+        transform: translateZ(20px) translateY(-10px);
+      }
+    }
+
+    /* Text Reveal Animations */
+    .hero-title {
+      font-family: var(--font-primary);
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .reveal-wrapper {
+      overflow: hidden;
+      display: block;
+    }
+
+    .reveal-text {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .title-main {
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      font-weight: 300;
+      letter-spacing: 12px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 1) 0%,
+        #e0c886 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .title-subtitle {
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 3px;
+    }
+
+    .hero-description {
+      font-family: var(--font-secondary);
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.5px;
+    }
+
+    .hero-dates {
+      margin-bottom: 3.5rem;
+    }
+
+    .date-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      border: 1px solid rgba(201, 169, 97, 0.4);
+      color: #e0c886;
+      letter-spacing: 2px;
+      font-weight: 400;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #c9a961 0%, #a08238 100%);
+      color: #0a0a0f;
+      padding: 1.2rem 3.5rem;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(201, 169, 97, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(201, 169, 97, 0.4);
+      background: linear-gradient(135deg, #d4b66d 0%, #c9a961 100%);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .scroll-indicator:hover {
+      color: #c9a961;
+    }
+
+    .arrow-down {
+      width: 15px;
+      height: 15px;
+      border-right: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      transform: rotate(45deg);
+      margin: 1rem auto 0;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: rotate(45deg) translate(0, 0);
+      }
+      40% {
+        transform: rotate(45deg) translate(-5px, -5px);
+      }
+      60% {
+        transform: rotate(45deg) translate(-3px, -3px);
+      }
+    }
+
+    /* General Animations */
+    .reveal-opacity {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+    .delay-4 {
+      animation-delay: 0.8s;
+    }
+    .delay-5 {
+      animation-delay: 1.2s;
+    }
+
+    @keyframes revealUp {
+      from {
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Purpose Section */
+    .purpose-section {
+      padding: 8rem 0;
+      background: #0a0a0f;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+      position: relative;
+    }
+
+    .section-header::before {
+      content: "";
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a961, transparent);
+    }
+
+    .section-title {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .title-underline {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a961, transparent);
+      margin: 0 auto;
+    }
+
+    .purpose-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: var(--spacing-lg);
+    }
+
+    .purpose-card {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 3rem;
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .purpose-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(180deg, #c9a961 0%, transparent);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .purpose-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(201, 169, 97, 0.2);
+      background: rgba(20, 20, 25, 0.7);
+    }
+
+    .purpose-card:hover::before {
+      width: 2px;
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .purpose-text {
+      font-family: var(--font-secondary);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .purpose-text strong {
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 400;
+    }
+
+    .float-animation {
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .float-animation-delay {
+      animation: float 8s ease-in-out infinite 2s;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    /* Facilitator Section */
+    .facilitator-section {
+      padding: 8rem 0;
+      background: rgba(15, 15, 20, 0.5);
+      color: rgba(255, 255, 255, 0.95);
+      position: relative;
+    }
+
+    .facilitator-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .facilitator-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .facilitator-image {
+      text-align: center;
+      position: relative;
+    }
+
+    .facilitator-image::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.1) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .doctor-photo {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: block;
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .doctor-photo:hover {
+      transform: scale(1.03);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+      border-color: rgba(201, 169, 97, 0.5);
+    }
+
+    .facilitator-label {
+      font-family: var(--font-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(201, 169, 97, 0.8);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .facilitator-name {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .facilitator-title {
+      font-family: var(--font-secondary);
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .facilitator-description {
+      font-family: var(--font-secondary);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.3px;
+    }
+
+    .facilitator-description em {
+      color: rgba(201, 169, 97, 0.9);
+      font-style: italic;
+    }
+
+    .facilitator-description strong {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+    }
+
+    /* Approach Section */
+    .investment-section {
+      padding: 8rem 0;
+      background: #0a0a0f;
+      color: rgba(255, 255, 255, 0.95);
+      position: relative;
+    }
+
+    .investment-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 4rem;
+    }
+
+    .approach-column {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      padding: 3rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .approach-column::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(180deg, #c9a961 0%, transparent);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .approach-column:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201, 169, 97, 0.2);
+      background: rgba(20, 20, 25, 0.7);
+    }
+
+    .approach-column:hover::before {
+      width: 2px;
+    }
+
+    .approach-title {
+      font-family: var(--font-primary);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .approach-list {
+      list-style: none;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .approach-list li {
+      padding: 0.75rem 0;
+      padding-left: 2rem;
+      position: relative;
+      line-height: 1.8;
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+    }
+
+    .approach-list li:hover {
+      color: rgba(255, 255, 255, 0.9);
+      padding-left: 2.3rem;
+    }
+
+    .approach-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #c9a961;
+      font-weight: 300;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .approach-list li:hover::before {
+      transform: translateX(3px);
+    }
+
+    /* Experience Section */
+    .experience-section {
+      padding: 8rem 0;
+      background: rgba(15, 15, 20, 0.4);
+      position: relative;
+    }
+
+    .experience-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: var(--spacing-lg);
+    }
+
+    .experience-item {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      padding: 2.5rem;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .experience-item::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: linear-gradient(0deg, rgba(201, 169, 97, 0.1), transparent);
+      transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .experience-item:hover {
+      border-color: rgba(201, 169, 97, 0.2);
+      transform: translateY(-8px);
+      background: rgba(20, 20, 25, 0.7);
+    }
+
+    .experience-item:hover::before {
+      height: 100%;
+    }
+
+    .experience-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .experience-item h3 {
+      font-family: var(--font-primary);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .experience-item p {
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Activities Section */
+    .activities-section {
+      padding: 8rem 0;
+      background: #0a0a0f;
+      position: relative;
+    }
+
+    .activities-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: var(--spacing-lg);
+    }
+
+    .activity-card {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      padding: 2rem;
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-left: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .activity-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      background: linear-gradient(180deg, #c9a961, transparent);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201, 169, 97, 0.2);
+      border-left-color: #c9a961;
+      background: rgba(20, 20, 25, 0.7);
+    }
+
+    .activity-card:hover::before {
+      width: 2px;
+    }
+
+    .activity-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .activity-card h3 {
+      font-family: var(--font-primary);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .activity-card p {
+      font-family: var(--font-secondary);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.65);
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CTA Mini Section */
+    .cta-mini-section {
+      padding: 8rem 0;
+      background: rgba(15, 15, 20, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-mini-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .cta-mini-section::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.08) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .cta-mini-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-mini-title {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+      letter-spacing: 1px;
+    }
+
+    .cta-mini-text {
+      font-family: var(--font-secondary);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 3rem;
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+    }
+
+    .cta-mini-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, #c9a961 0%, #b8944e 100%);
+      color: #0a0a0f;
+      padding: 1.25rem 3rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px rgba(201, 169, 97, 0.3);
+      border: 1px solid #c9a961;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-mini-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+
+    .cta-mini-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-mini-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(201, 169, 97, 0.5);
+      background: linear-gradient(135deg, #d4b66d 0%, #c9a961 100%);
+    }
+
+    .cta-mini-button .arrow {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 1.2rem;
+    }
+
+    .cta-mini-button:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    /* Itinerary Section */
+    .itinerary-section {
+      padding: 8rem 0;
+      background: #0a0a0f;
+      position: relative;
+    }
+
+    .itinerary-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .itinerary-timeline {
+      margin-top: var(--spacing-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .day-card {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .day-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201, 169, 97, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .day-header {
+      background: linear-gradient(
+        135deg,
+        rgba(201, 169, 97, 0.15) 0%,
+        rgba(201, 169, 97, 0.05) 100%
+      );
+      border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+      color: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .day-number {
+      display: block;
+      font-family: var(--font-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(201, 169, 97, 0.9);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .day-title {
+      font-family: var(--font-primary);
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      font-weight: 400;
+      margin: 0.5rem 0;
+      letter-spacing: 1px;
+    }
+
+    .day-theme {
+      font-family: var(--font-secondary);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .day-activities {
+      padding: 2rem;
+    }
+
+    .activity {
+      display: flex;
+      gap: 2rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .activity:hover {
+      padding-left: 0.5rem;
+      border-bottom-color: rgba(201, 169, 97, 0.2);
+    }
+
+    .activity:last-child {
+      border-bottom: none;
+    }
+
+    .time {
+      flex-shrink: 0;
+      color: #c9a961;
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      font-size: 0.9rem;
+      min-width: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-content h4 {
+      font-family: var(--font-primary);
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .activity-content p {
+      font-family: var(--font-secondary);
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      letter-spacing: 0.3px;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      padding: 8rem 0;
+      background: #0a0a0f;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .testimonials-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .testimonials-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float-orb 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.08) 0%,
+        transparent 70%
+      );
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.1) 0%,
+        transparent 70%
+      );
+      bottom: -150px;
+      right: -150px;
+      animation-delay: 5s;
+    }
+
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.06) 0%,
+        transparent 70%
+      );
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: 10s;
+    }
+
+    @keyframes float-orb {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(100px, -100px) scale(1.1);
+      }
+      66% {
+        transform: translate(-50px, 100px) scale(0.9);
+      }
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-label {
+      display: inline-block;
+      font-family: var(--font-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(201, 169, 97, 0.8);
+      margin-bottom: var(--spacing-sm);
+      font-weight: 400;
+    }
+
+    .testimonials-title {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: var(--spacing-md);
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+
+    .testimonials-subtitle {
+      font-family: var(--font-secondary);
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+
+    /* Video Testimonials */
+    .video-testimonials {
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      z-index: 2;
+    }
+
+    .video-featured {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .video-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(201, 169, 97, 0.3);
+      border-color: var(--color-accent);
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+
+    .video-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(201, 169, 97, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--color-white);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .video-small .video-wrapper {
+      padding-bottom: 75%; /* 4:3 for smaller videos */
+    }
+
+    /* Text Testimonials */
+    .text-testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-card {
+      position: relative;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: var(--spacing-lg);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .testimonial-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(74, 144, 164, 0.1) 0%,
+        rgba(201, 169, 97, 0.1) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: 0;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      border-color: var(--color-accent);
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.6),
+        0 0 50px rgba(201, 169, 97, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .testimonial-card:hover::before {
+      opacity: 1;
+    }
+
+    .testimonial-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.2) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+      animation: rotate-glow 8s linear infinite;
+    }
+
+    .testimonial-card:hover .testimonial-glow {
+      opacity: 1;
+    }
+
+    .quote-icon {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 6rem;
+      color: rgba(201, 169, 97, 0.15);
+      font-family: Georgia, serif;
+      line-height: 1;
+      z-index: 0;
+      transition: all 0.6s ease;
+    }
+
+    .testimonial-card:hover .quote-icon {
+      color: rgba(201, 169, 97, 0.25);
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    .testimonial-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-text {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: var(--spacing-lg);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-accent)
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-white);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover .author-avatar {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 30px rgba(201, 169, 97, 0.5);
+    }
+
+    .author-info {
+      flex: 1;
+    }
+
+    .author-name {
+      font-size: 1.1rem;
+      color: var(--color-white);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .author-location {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Staggered animations for testimonials */
+    .testimonial-card {
+      opacity: 0;
+      animation: fadeInScale 0.8s ease forwards;
+    }
+
+    .testimonial-1 {
+      animation-delay: 0.1s;
+    }
+    .testimonial-2 {
+      animation-delay: 0.2s;
+    }
+    .testimonial-3 {
+      animation-delay: 0.3s;
+    }
+    .testimonial-4 {
+      animation-delay: 0.4s;
+    }
+    .testimonial-5 {
+      animation-delay: 0.5s;
+    }
+    .testimonial-6 {
+      animation-delay: 0.6s;
+    }
+
+    /* Testimonials CTA */
+    .testimonials-cta {
+      text-align: center;
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-lg);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-text {
+      font-size: 1.5rem;
+      color: var(--color-white);
+      margin-bottom: var(--spacing-md);
+      font-family: var(--font-primary);
+    }
+
+    .cta-button-testimonials {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(135deg, var(--color-accent) 0%, #d4b970 100%);
+      color: var(--color-white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 40px rgba(201, 169, 97, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button-testimonials::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    .cta-button-testimonials:hover::before {
+      left: 100%;
+    }
+
+    .cta-button-testimonials:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 60px rgba(201, 169, 97, 0.6);
+    }
+
+    /* Responsive for testimonials */
+    @media (max-width: 768px) {
+      .text-testimonials {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-text {
+        font-size: 1rem;
+      }
+
+      .quote-icon {
+        font-size: 4rem;
+        top: 15px;
+        right: 20px;
+      }
+
+      .cta-text {
+        font-size: 1.2rem;
+      }
+
+      .cta-button-testimonials {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+
+      .orb-1,
+      .orb-2,
+      .orb-3 {
+        opacity: 0.2;
+      }
+    }
+
+    /* Why Attend Section */
+    .why-attend-section {
+      padding: 8rem 0;
+      background: rgba(15, 15, 20, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-attend-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .why-attend-section::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.05) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .why-attend-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+    }
+
+    .decorative-line {
+      height: 1px;
+      width: 100px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--color-accent),
+        transparent
+      );
+      animation: pulse-line 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-line {
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scaleX(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scaleX(1.2);
+      }
+    }
+
+    .why-attend-title {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    .why-attend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      position: relative;
+    }
+
+    .why-card {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .why-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(74, 144, 164, 0.1) 0%,
+        rgba(201, 169, 97, 0.1) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .why-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(201, 169, 97, 0.2);
+      background: rgba(20, 20, 25, 0.7);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .why-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.15) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .why-card:hover .card-glow {
+      opacity: 1;
+      animation: rotate-glow 4s linear infinite;
+    }
+
+    @keyframes rotate-glow {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .card-number {
+      position: absolute;
+      top: -20px;
+      right: 20px;
+      font-size: 6rem;
+      font-weight: 700;
+      color: rgba(201, 169, 97, 0.1);
+      font-family: var(--font-primary);
+      line-height: 1;
+      transition: all 0.5s ease;
+      z-index: 0;
+    }
+
+    .why-card:hover .card-number {
+      color: rgba(201, 169, 97, 0.2);
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-icon-large {
+      font-size: 4rem;
+      margin-bottom: var(--spacing-md);
+      filter: drop-shadow(0 0 20px rgba(201, 169, 97, 0.3));
+      animation: float-icon 3s ease-in-out infinite;
+    }
+
+    @keyframes float-icon {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotate(5deg);
+      }
+    }
+
+    .why-card:hover .card-icon-large {
+      animation: float-icon-hover 1s ease-in-out infinite;
+    }
+
+    @keyframes float-icon-hover {
+      0%,
+      100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-10px) scale(1.1) rotate(-5deg);
+      }
+    }
+
+    .card-content p {
+      font-family: var(--font-secondary);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      letter-spacing: 0.3px;
+      position: relative;
+    }
+
+    .card-content strong {
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 400;
+    }
+
+    /* Staggered animation on scroll */
+    .why-card {
+      opacity: 0;
+      animation: fadeInScale 0.8s ease forwards;
+    }
+
+    .card-1 {
+      animation-delay: 0.1s;
+    }
+    .card-2 {
+      animation-delay: 0.2s;
+    }
+    .card-3 {
+      animation-delay: 0.3s;
+    }
+    .card-4 {
+      animation-delay: 0.4s;
+    }
+    .card-5 {
+      animation-delay: 0.5s;
+    }
+    .card-6 {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Message Section */
+    .message-section {
+      padding: 8rem 0;
+      background: rgba(15, 15, 20, 0.5);
+      color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      position: relative;
+    }
+
+    .message-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .message-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .message-title {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      letter-spacing: 1px;
+    }
+
+    .message-text {
+      font-family: var(--font-secondary);
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.3px;
+    }
+
+    .message-highlight {
+      font-family: var(--font-secondary);
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .benefit-item {
+      background: rgba(15, 15, 20, 0.6);
+      backdrop-filter: blur(20px);
+      padding: 2rem;
+      border-radius: 16px;
+      font-family: var(--font-secondary);
+      font-size: 1.05rem;
+      font-weight: 300;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.3px;
+    }
+
+    .benefit-item:hover {
+      background: rgba(20, 20, 25, 0.7);
+      border-color: rgba(201, 169, 97, 0.2);
+      transform: translateY(-6px);
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: var(--spacing-xl) 0;
+      background: var(--color-light);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .faq-item {
+      background: var(--color-white);
+      padding: var(--spacing-md);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .faq-question {
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Location Section */
+    .location-section {
+      padding: var(--spacing-xl) 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--color-white);
+    }
+
+    .location-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+      align-items: start;
+    }
+
+    .location-info {
+      padding: var(--spacing-md);
+    }
+
+    .location-subtitle {
+      font-family: var(--font-primary);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-accent);
+    }
+
+    .location-description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .location-feature {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--spacing-md);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .location-feature:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(10px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .feature-content h4 {
+      font-size: 1.2rem;
+      margin-bottom: var(--spacing-xs);
+      color: var(--color-accent);
+    }
+
+    .feature-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .location-map {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .location-map:hover {
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+      transform: scale(1.02);
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: var(--spacing-md);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--color-accent);
+      color: var(--color-white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .map-link:hover {
+      background: #d4b970;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Final CTA */
+    .final-cta {
+      padding: 10rem 0;
+      background: #0a0a0f;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      position: relative;
+    }
+
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 600px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+    }
+
+    .final-cta::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(
+        circle,
+        rgba(201, 169, 97, 0.05) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-title {
+      font-family: var(--font-primary);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    .cta-subtitle {
+      font-family: var(--font-secondary);
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-bottom: 3rem;
+      color: rgba(201, 169, 97, 0.9);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .cta-button-large {
+      display: inline-block;
+      background: linear-gradient(135deg, #c9a961 0%, #b8944e 100%);
+      color: #0a0a0f;
+      padding: 1.5rem 4rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px rgba(201, 169, 97, 0.3);
+      margin-bottom: 2rem;
+      border: 1px solid #c9a961;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button-large::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+
+    .cta-button-large:hover::before {
+      left: 100%;
+    }
+
+    .cta-button-large:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(201, 169, 97, 0.5);
+      background: linear-gradient(135deg, #d4b66d 0%, #c9a961 100%);
+    }
+
+    .cta-note {
+      font-family: var(--font-secondary);
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .hero-content {
+        padding: 7rem var(--spacing-md) var(--spacing-lg);
+      }
+
+      .container {
+        max-width: 100%;
+      }
+
+      .purpose-content,
+      .approach-grid,
+      .experience-grid,
+      .activities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .navbar-menu.active {
+        transform: translateX(0);
+      }
+
+      .navbar-toggle {
+        display: flex;
+      }
+
+      .navbar-link {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem;
+      }
+
+      .hero-content {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .main-logo {
+        width: clamp(80px, 12vw, 100px);
+      }
+
+      .title-main {
+        font-size: clamp(3rem, 12vw, 5rem);
+        letter-spacing: 4px;
+      }
+
+      .title-subtitle {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+      }
+
+      .purpose-section,
+      .facilitator-section,
+      .investment-section,
+      .experience-section,
+      .activities-section,
+      .itinerary-section,
+      .message-section {
+        padding: 5rem 0;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+      }
+
+      .purpose-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .purpose-card,
+      .approach-column,
+      .experience-item,
+      .activity-card {
+        padding: 2rem;
+      }
+
+      .facilitator-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .doctor-photo {
+        width: 250px;
+        height: 250px;
+      }
+
+      .facilitator-image::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .activity {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .time {
+        min-width: auto;
+        text-align: left;
+      }
+
+      .day-header {
+        padding: 1.5rem;
+      }
+
+      .day-activities {
+        padding: 1.5rem;
+      }
+
+      .cta-mini-section {
+        padding: 6rem 0;
+      }
+
+      .cta-mini-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .cta-mini-button {
+        width: 100%;
+        justify-content: center;
+        padding: 1.25rem 2rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .final-cta {
+        padding: 7rem 0;
+      }
+
+      .cta-button-large {
+        width: 100%;
+        padding: 1.25rem 2rem;
+      }
+
+      .why-attend-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+
+      .why-attend-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .decorative-line {
+        width: 60px;
+      }
+
+      .card-number {
+        font-size: 4rem;
+        top: -10px;
+        right: 15px;
+      }
+
+      .card-icon-large {
+        font-size: 3rem;
+      }
+
+      .card-content p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Scroll Animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .purpose-card,
+      .experience-item,
+      .day-card {
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .purpose-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .purpose-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .purpose-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .experience-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .experience-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .experience-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .experience-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .experience-item:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .day-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .day-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .day-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  </style>
+
+  <script>
+    // Navbar functionality
+    document.addEventListener("DOMContentLoaded", () => {
+      const navbar = document.getElementById("navbar") as HTMLElement;
+      const navbarToggle = document.getElementById(
+        "navbarToggle",
+      ) as HTMLButtonElement;
+      const navbarMenu = document.getElementById("navbarMenu") as HTMLElement;
+      const navbarLinks = document.querySelectorAll(".navbar-link");
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      navbarToggle?.addEventListener("click", () => {
+        navbarToggle.classList.toggle("active");
+        navbarMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking a link
+      navbarLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navbarToggle?.classList.remove("active");
+          navbarMenu.classList.remove("active");
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (!navbar.contains(target)) {
+          navbarToggle?.classList.remove("active");
+          navbarMenu.classList.remove("active");
+        }
+      });
+
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            target.style.opacity = "1";
+            target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe animated elements
+      const animatedElements = document.querySelectorAll(
+        ".purpose-card, .experience-item, .day-card",
+      );
+      animatedElements.forEach((el) => observer.observe(el));
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener(
+          "click",
+          function (this: HTMLAnchorElement, e: Event) {
+            e.preventDefault();
+            const target = document.querySelector(
+              this.getAttribute("href") || "",
+            );
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          },
+        );
+      });
+
+      // Active link highlighting
+      const sections = document.querySelectorAll("section[id]");
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = (section as HTMLElement).offsetTop;
+          const sectionHeight = (section as HTMLElement).clientHeight;
+          if (window.scrollY >= sectionTop - 100) {
+            current = section.getAttribute("id") || "";
+          }
+        });
+
+        navbarLinks.forEach((link) => {
+          link.classList.remove("active");
+          const href = link.getAttribute("href");
+          if (href === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+    });
+  </script>
 </Layout>

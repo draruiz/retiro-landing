@@ -1,0 +1,795 @@
+---
+import backgroundStars from "../assets/backgorund.png";
+import mainLogo from "../assets/main_logo_brain.png";
+import Footer from "../components/Footer.astro";
+import { accommodations } from "../data/accommodations";
+import Layout from "../layouts/Layout.astro";
+
+// Group accommodations by category
+const groupedAccommodations = accommodations.reduce(
+  (acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = [];
+    }
+    acc[item.category].push(item);
+    return acc;
+  },
+  {} as Record<string, typeof accommodations>
+);
+
+const categories = Object.keys(groupedAccommodations);
+---
+
+<Layout>
+  <!-- Navbar -->
+  <nav class='navbar' id='navbar'>
+    <div class='navbar-container'>
+      <div class='navbar-logo'>
+        <img src={mainLogo.src} alt='CALMA Logo' class='navbar-logo-img' />
+        <span class='navbar-brand'>CALMA</span>
+      </div>
+
+      <button class='navbar-toggle' id='navbarToggle' aria-label='Toggle menu'>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+        <span class='hamburger-line'></span>
+      </button>
+
+      <div class='navbar-menu' id='navbarMenu'>
+        <a href='/' class='navbar-link'>Inicio</a>
+        <a href='/#proposito' class='navbar-link'>Propósito</a>
+        <a href='/#actividades' class='navbar-link'>Actividades</a>
+        <a href='/ubicacion' class='navbar-link'>Ubicación</a>
+        <a href='/faq' class='navbar-link'>FAQ</a>
+        <a href='/#inscripcion' class='navbar-link navbar-cta'>Inscríbete</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class='acomodaciones-page'>
+    <!-- Hero Header -->
+    <section class='acomodaciones-hero'>
+      <div
+        class='hero-bg'
+        style={`background-image: url(${backgroundStars.src})`}
+      >
+        <div class='hero-overlay'></div>
+      </div>
+      <div class='container hero-content'>
+        <h1 class='page-title'>Acomodaciones</h1>
+        <p class='page-subtitle'>
+          Disfruta de espacios confortables diseñados para tu descanso y
+          renovación
+        </p>
+      </div>
+      <div class='scroll-indicator'>
+        <span>Descubre más</span>
+        <div class='arrow-down'></div>
+      </div>
+    </section>
+
+    <div class='container content-wrapper'>
+      <div class='acomodaciones-intro'>
+        <p>
+          Elige la habitación perfecta para tu experiencia de renovación y
+          descanso. Todas las habitaciones incluyen acceso completo a las
+          actividades del retiro.
+        </p>
+      </div>
+
+      <!-- Shared Rooms Message -->
+      <div class='shared-rooms-message'>
+        <div class='message-content'>
+          <h3 class='message-title'>
+            Habitaciones Compartidas: una experiencia humana que potencia tu
+            proceso
+          </h3>
+          <div class='message-text'>
+            <p>
+              Compartir habitación no es un inconveniente: es parte esencial del
+              camino que vas a recorrer en este retiro. Muchas personas llegan
+              con dudas, y se sorprenden al descubrir que los momentos más
+              significativos ocurren justamente allí.
+            </p>
+            <p>
+              Nuestras habitaciones compartidas están diseñadas para ofrecer
+              comodidad, armonía y respeto, con normas claras de convivencia y
+              silencio. Este formato reduce el aislamiento, crea comunidad y
+              potencia tu proceso emocional. Solo son dos noches en un ambiente
+              seguro y profesional.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Categories -->
+      {
+        categories.map((category) => (
+          <div class='room-category'>
+            <h2 class='category-title'>{category}</h2>
+            <div class='rooms-grid'>
+              {groupedAccommodations[category].map((accommodation) => (
+                <a
+                  href={`/acomodaciones/${accommodation.id}`}
+                  class='accommodation-card'
+                >
+                  <div class='card-image-container'>
+                    <img
+                      src={accommodation.images[0]}
+                      alt={accommodation.title}
+                      class='card-image'
+                      loading='lazy'
+                    />
+                    {accommodation.badge && (
+                      <span class='premium-badge'>{accommodation.badge}</span>
+                    )}
+                    <div class='card-overlay'>
+                      <span class='view-details'>Ver Detalles</span>
+                    </div>
+                  </div>
+
+                  <div class='card-content'>
+                    <h3 class='card-title'>{accommodation.title}</h3>
+                    <p class='card-description'>{accommodation.description}</p>
+
+                    <div class='card-footer'>
+                      <div class='price-container'>
+                        <span class='price-label'>
+                          {accommodation.priceLabel}
+                        </span>
+                        <span class='price-amount'>{accommodation.price}</span>
+                      </div>
+                      <div class='arrow-icon'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='24'
+                          height='24'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          stroke-width='1'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                        >
+                          <line x1='5' y1='12' x2='19' y2='12' />
+                          <polyline points='12 5 19 12 12 19' />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      <div class='booking-note'>
+        <p>
+          <strong>Nota:</strong> Todos los precios incluyen alojamiento completo
+          durante los 3 días del retiro, todas las comidas, actividades terapéuticas
+          y holísticas, materiales y acceso a todas las instalaciones.
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<Footer />
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Navbar Styles */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.25rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .navbar-logo:hover {
+    opacity: 0.8;
+  }
+
+  .navbar-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .navbar-brand {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+  }
+
+  .navbar-menu {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .navbar-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .navbar-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #c9a961;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-link:hover {
+    color: #ffffff;
+  }
+
+  .navbar-link:hover::after {
+    width: 100%;
+  }
+
+  .navbar-cta {
+    background: rgba(201, 169, 97, 0.15);
+    color: #c9a961 !important;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0;
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  .navbar-cta::after {
+    display: none;
+  }
+
+  .navbar-cta:hover {
+    background: rgba(201, 169, 97, 0.25);
+    border-color: rgba(201, 169, 97, 0.5);
+    transform: none;
+  }
+
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .hamburger-line {
+    width: 25px;
+    height: 1px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  .acomodaciones-page {
+    min-height: 100vh;
+    padding: 0;
+    background: #0a0a0f;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Hero Section */
+  .acomodaciones-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7) contrast(1.1);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 15, 0.7) 0%,
+      rgba(10, 10, 15, 0.5) 50%,
+      rgba(10, 10, 15, 0.9) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 4rem;
+  }
+
+  .page-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .page-subtitle {
+    font-family: "Inter", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+    animation: fadeInUp 1s ease-out 0.4s backwards;
+  }
+
+  .scroll-indicator span {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .arrow-down {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(
+      to bottom,
+      rgba(201, 169, 97, 0.6),
+      transparent
+    );
+    animation: arrowBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes arrowBounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Content Wrapper */
+  .content-wrapper {
+    padding: 6rem 4rem 8rem;
+  }
+
+  .acomodaciones-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at 20% 30%,
+        rgba(201, 169, 97, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 70%,
+        rgba(45, 67, 86, 0.08) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .acomodaciones-intro {
+    text-align: center;
+    margin-bottom: 6rem;
+    padding: 0 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+  }
+
+  .acomodaciones-intro p {
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* Shared Rooms Message */
+  .shared-rooms-message {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 4px;
+    padding: 4rem;
+    margin-bottom: 8rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+
+  .shared-rooms-message::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #c9a961;
+  }
+
+  .message-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .message-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    color: #c9a961;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  .message-text {
+    font-family: "Inter", sans-serif;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Room Categories */
+  .room-category {
+    margin-bottom: 8rem;
+  }
+
+  .category-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+  }
+
+  /* Accommodation Cards */
+  .accommodation-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .accommodation-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(201, 169, 97, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-image-container {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .accommodation-card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .premium-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #c9a961;
+    color: #0a0a0f;
+    padding: 0.25rem 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .accommodation-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .view-details {
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  .accommodation-card:hover .view-details {
+    transform: translateY(0);
+  }
+
+  .card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(20, 20, 25, 0.5),
+      rgba(10, 10, 15, 0.8)
+    );
+  }
+
+  .card-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .card-description {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.5rem;
+  }
+
+  .price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .price-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .price-amount {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    color: #c9a961;
+    font-weight: 400;
+  }
+
+  .arrow-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .accommodation-card:hover .arrow-icon {
+    background: #c9a961;
+    border-color: #c9a961;
+    color: #0a0a0f;
+  }
+
+  /* Booking Note */
+  .booking-note {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    margin-top: 4rem;
+  }
+
+  .booking-note p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+  }
+
+  .booking-note strong {
+    color: #c9a961;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .container {
+      padding: 0 2rem;
+    }
+
+    .content-wrapper {
+      padding: 4rem 2rem 6rem;
+    }
+
+    .rooms-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none;
+    }
+
+    .navbar-toggle {
+      display: flex;
+    }
+
+    .page-title {
+      font-size: 3rem;
+    }
+
+    .shared-rooms-message {
+      padding: 2rem;
+    }
+
+    .message-title {
+      font-size: 1.5rem;
+    }
+
+    .rooms-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
