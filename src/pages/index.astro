@@ -102,7 +102,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     <section
       class='purpose-section'
       id='proposito'
-      style={`background: linear-gradient(rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.85)), url(${bosqueRioDeOro.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
+      style={`background: linear-gradient(rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.85)), url(${bosqueRioDeOro.src}); background-size: cover; background-position: center; background-attachment: scroll;`}
     >
       <div class='container'>
         <div class='section-header'>
@@ -184,7 +184,7 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     <!-- Enfoque Section -->
     <section
       class='investment-section'
-      style={`background: linear-gradient(rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.85)), url(${bosque2RioDeOro.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
+      style={`background: linear-gradient(rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.85)), url(${bosque2RioDeOro.src}); background-size: cover; background-position: center; background-attachment: scroll;`}
     >
       <div class='container'>
         <div class='approach-grid'>
@@ -263,7 +263,18 @@ import LocationShowcase from "../components/LocationShowcase.astro";
 
     <!-- Actividades Principales Section -->
     <section class='activities-section' id='actividades'>
-      <video autoplay muted loop playsinline class='activities-video-bg'>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class='activities-video-bg'
+        preload='auto'
+      >
+        <source
+          src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/ed69179c3038dc5546bf71c8dcf865bb/downloads/default.mp4'
+          type='video/mp4'
+        />
         <source
           src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/ed69179c3038dc5546bf71c8dcf865bb/manifest/video.m3u8'
           type='application/x-mpegURL'
@@ -698,7 +709,18 @@ import LocationShowcase from "../components/LocationShowcase.astro";
 
     <!-- Por Qué Ir Section -->
     <section class='why-attend-section'>
-      <video autoplay muted loop playsinline class='why-attend-video-bg'>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class='why-attend-video-bg'
+        preload='auto'
+      >
+        <source
+          src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/078c3950f2b30797f837df3fa1976bd0/downloads/default.mp4'
+          type='video/mp4'
+        />
         <source
           src='https://customer-zc0folpruxax2kyz.cloudflarestream.com/078c3950f2b30797f837df3fa1976bd0/manifest/video.m3u8'
           type='application/x-mpegURL'
@@ -1396,6 +1418,10 @@ import LocationShowcase from "../components/LocationShowcase.astro";
     .purpose-section {
       padding: 8rem 0;
       position: relative;
+      background-repeat: no-repeat !important;
+      -webkit-background-size: cover !important;
+      background-size: cover !important;
+      min-height: 100vh;
     }
 
     .section-header {
@@ -1638,6 +1664,10 @@ import LocationShowcase from "../components/LocationShowcase.astro";
       background: #0a0a0f;
       color: rgba(255, 255, 255, 0.95);
       position: relative;
+      background-repeat: no-repeat !important;
+      -webkit-background-size: cover !important;
+      background-size: cover !important;
+      min-height: 100vh;
     }
 
     .investment-section::before {
@@ -1856,6 +1886,14 @@ import LocationShowcase from "../components/LocationShowcase.astro";
       z-index: 0;
       opacity: 0.3;
       object-fit: cover;
+      /* Mejorar calidad de renderizado del video */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .activities-section .container {
@@ -2705,6 +2743,14 @@ import LocationShowcase from "../components/LocationShowcase.astro";
       z-index: 0;
       opacity: 0.3;
       object-fit: cover;
+      /* Mejorar calidad de renderizado del video */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .why-attend-section .container {
