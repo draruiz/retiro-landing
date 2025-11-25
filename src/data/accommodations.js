@@ -27,6 +27,9 @@ export const accommodations = [
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/3c41f902-90c2-4467-3424-f606ba994c00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/28c0ac9f-3726-4c4d-5d20-288958c79e00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/15f56eee-7cbb-4232-ec89-dc46e8305200/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/9d7fc8d0-8951-4780-cce8-ff2fc9ff4b00/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/f3cf754b-5ff4-4197-d5ff-38632ae11400/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/6c55dd3a-28c2-4788-064e-137ed70a2600/public",
     ],
   },
   {
@@ -54,10 +57,13 @@ export const accommodations = [
       "🌀 Ventilador",
     ],
     images: [
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/77827f7f-f98b-426a-d343-f1b0aa70d700/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/aa55089d-aeec-45b8-2897-bef78759d000/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/6095cd71-3705-480a-bb00-0cef161b5500/public",
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/77827f7f-f98b-426a-d343-f1b0aa70d700/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/12280653-f510-48df-55d5-d330b6f8bc00/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/a8cac390-843f-46d2-350b-ceb7fd2c0900/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/a245ec4c-3c4d-4e4e-9fa6-23d26b2ba500/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/e50cb643-69b2-46b1-f6f5-3a36774cd400/public",
     ],
   },
   {
@@ -85,10 +91,11 @@ export const accommodations = [
       "🌀 Ventilador",
     ],
     images: [
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/fbdbae5b-c89f-4c9e-0919-2ad160349d00/public",
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/5e40b810-3025-41e0-19ea-cb277fa5d400/public",
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/a9c70929-0697-48da-91f5-aa8049868200/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/1e26f22d-100b-46f5-7ed0-2b7d644b0600/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/fbdbae5b-c89f-4c9e-0919-2ad160349d00/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/7f8168a1-0b3f-445b-19b2-a9c416aef700/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/94f22140-112f-4644-c629-1f257014ad00/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/be0520a8-695a-4bc8-052c-b6e4dff8c200/public",
     ],
   },
   {
@@ -116,10 +123,11 @@ export const accommodations = [
       "🌀 Ventilador",
     ],
     images: [
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/5cd9b3cb-df04-4721-065c-9e27cedf8700/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/15155a51-15c6-4c50-651c-5c25c3600500/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/25ef8b4f-5a87-431c-b96a-aef976f1dd00/public",
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/d6fc61ca-4a4d-418e-0dc0-87b8888c2200/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/05e1f4ee-1196-4dc2-a2d0-2faef490e400/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/e9ceca7a-42f1-427a-e537-769756577700/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/c89db069-5df6-4e8a-8870-8161a5364500/public",
     ],
   },
   {
@@ -147,10 +155,12 @@ export const accommodations = [
       "🌀 Ventilador",
     ],
     images: [
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/df442dfb-5003-4cc7-4f03-fb25aa970200/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/710f3eb1-e6e8-4a5a-906a-50cc184cab00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/9813298a-10ca-4b19-3749-09cba37d4100/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/c3d2411b-9b6a-4610-149b-58af7ee25300/public",
-      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/df442dfb-5003-4cc7-4f03-fb25aa970200/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/0a953835-6435-4bb6-e72f-8a6a8c32cd00/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/802e608c-a48b-4f02-b5a9-cf6693a53700/public",
     ],
   },
   {
