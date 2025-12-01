@@ -6,6 +6,10 @@ interface Props {
     category: string;
     description: string;
     price: string;
+    priceCouple?: string;
+    priceSingle?: string;
+    priceBunk?: string;
+    priceTwin?: string;
     priceLabel: string;
     amenities: string[];
     images: string[];
@@ -14,6 +18,7 @@ interface Props {
 }
 
 const { accommodation } = Astro.props;
+const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
 ---
 
 <article class='accommodation-card' data-id={accommodation.id}>
@@ -40,8 +45,43 @@ const { accommodation } = Astro.props;
 
     <div class='card-footer'>
       <div class='price-container'>
-        <span class='price-label'>{accommodation.priceLabel}</span>
-        <span class='price-amount'>{accommodation.price}</span>
+        {hasMultiplePrices ? (
+          <div class='price-dual'>
+            <div class='price-row'>
+              <span class='price-type'>{accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple ? 'Individual' : 'Cama doble'))}</span>
+              <span class='price-amount'>{accommodation.price}</span>
+            </div>
+            {accommodation.priceTwin && (
+              <div class='price-row'>
+                <span class='price-type'>Cama 1.20m</span>
+                <span class='price-amount twin'>{accommodation.priceTwin}</span>
+              </div>
+            )}
+            {accommodation.priceSingle && (
+              <div class='price-row'>
+                <span class='price-type'>Cama sencilla</span>
+                <span class='price-amount'>{accommodation.priceSingle}</span>
+              </div>
+            )}
+            {accommodation.priceBunk && (
+              <div class='price-row'>
+                <span class='price-type'>Camarote</span>
+                <span class='price-amount'>{accommodation.priceBunk}</span>
+              </div>
+            )}
+            {accommodation.priceCouple && (
+              <div class='price-row'>
+                <span class='price-type'>Parejas</span>
+                <span class='price-amount couple'>{accommodation.priceCouple}</span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            <span class='price-label'>{accommodation.priceLabel}</span>
+            <span class='price-amount'>{accommodation.price}</span>
+          </>
+        )}
       </div>
       <button
         class='details-btn'
@@ -215,6 +255,36 @@ const { accommodation } = Astro.props;
     font-size: 1.5rem;
     color: #c9a961;
     font-weight: 400;
+  }
+
+  .price-dual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .price-type {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 60px;
+  }
+
+  .price-dual .price-amount {
+    font-size: 1.25rem;
+  }
+
+  .price-dual .price-amount.couple,
+  .price-dual .price-amount.twin {
+    color: #c9a961;
   }
 
   .details-btn {

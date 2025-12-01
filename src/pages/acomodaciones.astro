@@ -41,7 +41,7 @@ const categories = Object.keys(groupedAccommodations);
         <a href='/#actividades' class='navbar-link'>Actividades</a>
         <a href='/ubicacion' class='navbar-link'>Ubicación</a>
         <a href='/faq' class='navbar-link'>FAQ</a>
-        <a href='/#inscripcion' class='navbar-link navbar-cta'>Inscríbete</a>
+        <a href='https://wa.me/18135686424' target='_blank' rel='noopener noreferrer' class='navbar-link navbar-cta'>Inscríbete</a>
       </div>
     </div>
   </nav>
@@ -134,10 +134,39 @@ const categories = Object.keys(groupedAccommodations);
 
                     <div class='card-footer'>
                       <div class='price-container'>
-                        <span class='price-label'>
-                          {accommodation.priceLabel}
-                        </span>
-                        <span class='price-amount'>{accommodation.price}</span>
+                        {(accommodation.priceSingle || accommodation.priceBunk || accommodation.priceCouple) ? (
+                          <div class='price-dual'>
+                            <div class='price-row'>
+                              <span class='price-type'>{accommodation.priceBunk ? 'Cama king' : (accommodation.priceCouple ? 'Individual' : 'Cama doble')}</span>
+                              <span class='price-amount'>{accommodation.price}</span>
+                            </div>
+                            {accommodation.priceSingle && (
+                              <div class='price-row'>
+                                <span class='price-type'>Cama sencilla</span>
+                                <span class='price-amount'>{accommodation.priceSingle}</span>
+                              </div>
+                            )}
+                            {accommodation.priceBunk && (
+                              <div class='price-row'>
+                                <span class='price-type'>Camarote</span>
+                                <span class='price-amount'>{accommodation.priceBunk}</span>
+                              </div>
+                            )}
+                            {accommodation.priceCouple && (
+                              <div class='price-row'>
+                                <span class='price-type'>Parejas</span>
+                                <span class='price-amount couple'>{accommodation.priceCouple}</span>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <>
+                            <span class='price-label'>
+                              {accommodation.priceLabel}
+                            </span>
+                            <span class='price-amount'>{accommodation.price}</span>
+                          </>
+                        )}
                       </div>
                       <div class='arrow-icon'>
                         <svg
@@ -711,6 +740,35 @@ const categories = Object.keys(groupedAccommodations);
     font-size: 1.5rem;
     color: #c9a961;
     font-weight: 400;
+  }
+
+  .price-dual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .price-type {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 60px;
+  }
+
+  .price-dual .price-amount {
+    font-size: 1.2rem;
+  }
+
+  .price-dual .price-amount.couple {
+    color: #c9a961;
   }
 
   .arrow-icon {
