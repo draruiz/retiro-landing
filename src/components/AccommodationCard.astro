@@ -8,6 +8,7 @@ interface Props {
     price: string;
     priceCouple?: string;
     priceSingle?: string;
+    priceMezzanine?: string;
     priceBunk?: string;
     priceTwin?: string;
     priceLabel: string;
@@ -18,7 +19,7 @@ interface Props {
 }
 
 const { accommodation } = Astro.props;
-const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
+const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMezzanine || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
 ---
 
 <article class='accommodation-card' data-id={accommodation.id}>
@@ -48,9 +49,15 @@ const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceBu
         {hasMultiplePrices ? (
           <div class='price-dual'>
             <div class='price-row'>
-              <span class='price-type'>{accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple ? 'Individual' : 'Cama doble'))}</span>
+              <span class='price-type'>{accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple ? 'Individual' : 'Cama doble')))}</span>
               <span class='price-amount'>{accommodation.price}</span>
             </div>
+            {accommodation.priceMezzanine && (
+              <div class='price-row'>
+                <span class='price-type'>Con acompañante</span>
+                <span class='price-amount'>{accommodation.priceMezzanine}</span>
+              </div>
+            )}
             {accommodation.priceTwin && (
               <div class='price-row'>
                 <span class='price-type'>Cama 1.20m</span>

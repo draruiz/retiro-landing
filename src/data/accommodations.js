@@ -1,46 +1,45 @@
 export const accommodations = [
   // ═══════════════════════════════════════════════════════════════════════════
-  // CABAÑAS DOBLES - Cabañas 01, 02 y 04
+  // CABAÑAS DOBLES - Cabañas 1, 2 y 3
   // Mismas amenities, capacidad para 2 personas
-  // Cabaña 04 tiene jacuzzi grande, las demás jacuzzi de 2 puestos
+  // Cabaña 3 tiene jacuzzi grande, las demás jacuzzi de 2 puestos
   // ═══════════════════════════════════════════════════════════════════════════
   {
     id: "cabana-doble",
-    title: "Cabaña Doble",
+    title: "Cabaña 1, 2 y 3",
     category: "Cabañas Compartidas",
-    units: ["Cabaña 01", "Cabaña 02", "Cabaña 04 (Jacuzzi Grande)"],
+    units: ["Cabaña 1", "Cabaña 2", "Cabaña 3"],
     description:
-      "Cabaña compartida ideal para parejas o viajeros individuales. Primer piso con cama doble de 1.60×1.90 m, segundo piso con cama sencilla de 1.20×1.90 m. Perfecta para disfrutar de la naturaleza con todas las comodidades. La Cabaña 04 cuenta con jacuzzi grande.",
+      "Cabaña con cama doble (1.60 x 1.90) y mezanine, ideal para viajeros independientes, parejas o personas que deseen compartir con un familiar o acompañante.",
+    sharedNote:
+      "Aclaración importante: El espacio es compartido únicamente entre mujeres o únicamente entre hombres. No se comparten habitaciones mixtas. Esto garantiza un ambiente de respeto, comodidad, seguridad y tranquilidad para todos los participantes.",
     price: "$2,300 USD",
-    priceSingle: "$2,000 USD",
+    priceMezzanine: "$3,500 USD",
     priceCouple: "$3,500 USD",
-    priceLabel: "Cama doble / Cama sencilla / Parejas",
+    priceLabel: "Uso individual / Con acompañante (mezanine) / Pareja",
     amenities: [
       "🛏️ Cama doble 1.60 x 1.90 m",
       "♨️ Ducha agua caliente",
-      "🔊 Bafle JBL",
-      "🍳 Cocina totalmente equipada",
-      "📺 TV (Netflix)",
-      "🍖 Asador BBQ",
       "❄️ Aire acondicionado",
       "🚿 Baño privado",
       "📶 Wifi",
-      "🛁 Jacuzzi (Grande en Cabaña 04)",
+      "🛁 Jacuzzi (Grande en Cabaña 3)",
       "🌲 Vista al bosque",
       "🍷 Minibar",
       "🏕️ Malla catamarán",
       "🌀 Ventilador",
     ],
     images: [
-      // Imágenes Cabaña 01
+      // Imágenes Cabaña 1
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/3c41f902-90c2-4467-3424-f606ba994c00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/28c0ac9f-3726-4c4d-5d20-288958c79e00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/15f56eee-7cbb-4232-ec89-dc46e8305200/public",
-      // Imágenes Cabaña 02
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/32447675-3c7f-4f3c-2a19-6988e6ca8300/public",
+      // Imágenes Cabaña 2
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/77827f7f-f98b-426a-d343-f1b0aa70d700/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/aa55089d-aeec-45b8-2897-bef78759d000/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/6095cd71-3705-480a-bb00-0cef161b5500/public",
-      // Imágenes Cabaña 04
+      // Imágenes Cabaña 3
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/15155a51-15c6-4c50-651c-5c25c3600500/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/25ef8b4f-5a87-431c-b96a-aef976f1dd00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/05e1f4ee-1196-4dc2-a2d0-2faef490e400/public",
@@ -53,26 +52,24 @@ export const accommodations = [
   // Cama king + camarotes (2 cupos)
   // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: "cabana-familiar-camarotes",
-    title: "Cabaña Familiar con Camarotes",
+    id: "cabana-camarotes",
+    title: "Cabaña con Camarotes",
     category: "Cabañas Compartidas",
-    badge: "Familiar",
-    units: ["Cabaña 03"],
+    badge: "Camarotes",
+    units: ["Cabaña 04"],
     description:
-      "Cabaña ideal para grupos. Cuenta con cama king y camarotes para mayor capacidad. Jacuzzi grande para disfrutar en grupo.",
+      "Cabaña amplia, cómoda y cuidadosamente organizada para quienes desean compartir el espacio de manera segura y armoniosa.",
+    sharedNote:
+      "Aclaración importante: El espacio es compartido únicamente entre mujeres o únicamente entre hombres. No se comparten habitaciones mixtas. Esto garantiza un ambiente de respeto, comodidad, seguridad y tranquilidad para todos los participantes.",
     price: "$1,900 USD",
     priceBunk: "$1,700 USD",
-    priceLabel: "Cama king / Cama sencilla / Camarote",
+    priceLabel: "Cama king / Cama mezzanine / Camarote",
     inventoryNote: "2 cupos disponibles en camarotes",
     amenities: [
       "🛏️ Cama king",
-      "🛏️ Cama sencilla",
+      "🛏️ Cama mezzanine",
       "🛏️ Camarotes (2 cupos)",
       "♨️ Ducha agua caliente",
-      "🔊 Bafle JBL",
-      "🍳 Cocina totalmente equipada",
-      "📺 TV (Netflix)",
-      "🍖 Asador BBQ",
       "❄️ Aire acondicionado",
       "🚿 Baño privado",
       "📶 Wifi",
@@ -86,6 +83,8 @@ export const accommodations = [
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/1e26f22d-100b-46f5-7ed0-2b7d644b0600/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/fbdbae5b-c89f-4c9e-0919-2ad160349d00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/7f8168a1-0b3f-445b-19b2-a9c416aef700/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/9813298a-10ca-4b19-3749-09cba37d4100/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/72298c5a-3bc3-4689-51c9-500c41ad4500/public",
     ],
   },
   // ═══════════════════════════════════════════════════════════════════════════
@@ -93,27 +92,26 @@ export const accommodations = [
   // Cama king + cama sencilla + camarotes (2 cupos)
   // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: "cabana-familiar-completa",
-    title: "Cabaña Familiar Completa",
+    id: "cabana-completa-mezzanine",
+    title: "Cabaña Completa Mezzanine",
     category: "Cabañas Compartidas",
-    badge: "Más Capacidad",
+    badge: "Mezzanine",
     units: ["Cabaña 05"],
     description:
-      "Nuestra cabaña con mayor capacidad. Cuenta con cama king, cama sencilla y camarotes adicionales. Perfecta para familias o grupos grandes. Jacuzzi grande incluido.",
+      "Cabaña amplia, cómoda y cuidadosamente organizada para quienes desean compartir el espacio de manera segura y armoniosa.",
+    sharedNote:
+      "Aclaración importante: El espacio es compartido únicamente entre mujeres o únicamente entre hombres. No se comparten habitaciones mixtas. Esto garantiza un ambiente de respeto, comodidad, seguridad y tranquilidad para todos los participantes.",
     price: "$1,900 USD",
     priceSingle: "$1,500 USD",
     priceBunk: "$1,700 USD",
-    priceLabel: "Cama king / Cama sencilla / Camarote",
+    priceLabel: "Cama king / Cama (Mezzanine) / Camarote",
     inventoryNote: "2 cupos disponibles en camarotes",
     amenities: [
       "🛏️ Cama king",
-      "🛏️ Cama sencilla",
+      "🛏️ Cama mezzanine",
       "🛏️ Camarotes (2 cupos)",
       "♨️ Ducha agua caliente",
-      "🔊 Bafle JBL",
       "🍳 Cocina totalmente equipada",
-      "📺 TV (Netflix)",
-      "🍖 Asador BBQ",
       "❄️ Aire acondicionado",
       "🚿 Baño privado",
       "📶 Wifi",
@@ -127,8 +125,14 @@ export const accommodations = [
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/df442dfb-5003-4cc7-4f03-fb25aa970200/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/710f3eb1-e6e8-4a5a-906a-50cc184cab00/public",
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/9813298a-10ca-4b19-3749-09cba37d4100/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/30aa17ee-fcf9-4722-4c6f-13904da50b00/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/60bc055e-2e23-4c5d-1b25-125cc5792900/public",
+      "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/32447675-3c7f-4f3c-2a19-6988e6ca8300/public",
     ],
   },
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PLAZAS PAN DE AZÚCAR - Suite, Deluxe y King
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     id: "suite-plaza",
     title: "Plaza Pan de Azúcar Suite",
@@ -144,10 +148,7 @@ export const accommodations = [
       "📶 Wifi",
       "🏔️ Vista a la montaña",
       "🍷 Minibar",
-      "🛁 Jacuzzi grande 4 plazas con agua caliente",
       "🚿 Baño privado",
-      "📺 TV (Netflix)",
-      "🔊 Bafle JBL",
       "❄️ Aire acondicionado",
       "♨️ Ducha con agua caliente",
     ],
@@ -164,19 +165,17 @@ export const accommodations = [
     badge: "Premium",
     description:
       "Habitación deluxe con balcón privado con vista a las montañas, cama king, bañera de hidromasaje y zona de meditación privada. Elegancia y confort supremo.",
-    price: "$2,300 USD",
-    priceCouple: "$3,500 USD",
+    price: "$2,700 USD",
+    priceCouple: "$3,700 USD",
     priceLabel: "1 persona / Pareja",
     amenities: [
       "🛏️ Cama doble 1.80 x 2.00 m",
       "📶 Wifi",
-      "📺 TV (Netflix)",
       "🍷 Minibar",
       "❄️ Aire acondicionado",
       "🚿 Baño privado",
       "🏔️ Vista a la Montaña",
       "♨️ Ducha agua caliente",
-      "🛁 Jacuzzi dos puestos",
     ],
     images: [
       "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/fb615e59-b28a-41be-ea75-5e2e383ebb00/public",
@@ -191,13 +190,12 @@ export const accommodations = [
     badge: "Premium",
     description:
       "Suite king con terraza panorámica privada, jacuzzi exterior, sala de estar y comedor privado. Lujo y privacidad absoluta.",
-    price: "$2,300 USD",
-    priceCouple: "$3,500 USD",
+    price: "$2,700 USD",
+    priceCouple: "$3,700 USD",
     priceLabel: "1 persona / Pareja",
     amenities: [
       "🛏️ Cama doble 1.80 x 2.00 m",
       "🌲 Vista al bosque",
-      "📺 TV (Netflix)",
       "🍷 Minibar",
       "🚿 Baño privado",
       "♨️ Ducha agua caliente",
@@ -226,6 +224,8 @@ export const accommodations = [
     ],
     description:
       "Habitación compartida ideal para quienes viajan solos o con un acompañante. Cada habitación cuenta con una cama de 1.60m y una cama de 1.20m. Perfecta para conectar con otros participantes del retiro.",
+    sharedNote:
+      "Aclaración importante: El espacio es compartido únicamente entre mujeres o únicamente entre hombres. No se comparten habitaciones mixtas. Esto garantiza un ambiente de respeto, comodidad, seguridad y tranquilidad para todos los participantes.",
     price: "$1,800 USD",
     priceTwin: "$1,700 USD",
     priceLabel: "Cama 1.60m / Cama 1.20m",
@@ -248,18 +248,17 @@ export const accommodations = [
     badge: "Más Privacidad",
     units: ["Arboleda 01", "Arboleda 02", "Arboleda 04 (Jacuzzi Grande)"],
     description:
-      "Cabaña privada rodeada de naturaleza, ideal para quienes buscan mayor tranquilidad y conexión con el entorno. Ubicada a solo 4 minutos a pie del área principal. Primer piso con cama doble de 1.60×1.90 m, segundo piso con cama sencilla de 1.20×1.90 m. La Arboleda 04 cuenta con jacuzzi grande.",
-    price: "$2,100 USD",
-    priceSingle: "$1,800 USD",
-    priceCouple: "$3,300 USD",
-    priceLabel: "Cama doble / Cama sencilla / Parejas",
+      "Cabaña con cama doble (1.60 x 1.90) y mezanine, ideal para viajeros independientes, parejas o personas que deseen compartir con un familiar o acompañante. Ubicada a solo 4 minutos a pie del área principal.",
+    sharedNote:
+      "Aclaración importante: El espacio es compartido únicamente entre mujeres o únicamente entre hombres. No se comparten habitaciones mixtas. Esto garantiza un ambiente de respeto, comodidad, seguridad y tranquilidad para todos los participantes.",
+    price: "$2,300 USD",
+    priceMezzanine: "$3,500 USD",
+    priceCouple: "$3,500 USD",
+    priceLabel: "Uso individual / Con acompañante (mezanine) / Pareja",
     amenities: [
       "🛏️ Cama doble 1.60 x 1.90 m",
       "♨️ Ducha agua caliente",
-      "🔊 Bafle JBL",
       "🍳 Cocina totalmente equipada",
-      "📺 TV (Netflix)",
-      "🍖 Asador BBQ",
       "❄️ Aire acondicionado",
       "🚿 Baño privado",
       "📶 Wifi",

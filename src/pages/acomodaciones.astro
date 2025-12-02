@@ -81,22 +81,35 @@ const categories = Object.keys(groupedAccommodations);
       <div class='shared-rooms-message'>
         <div class='message-content'>
           <h3 class='message-title'>
-            Habitaciones Compartidas: una experiencia humana que potencia tu
+            Habitaciones compartidas: una experiencia humana que acompaña tu
             proceso
           </h3>
           <div class='message-text'>
             <p>
-              Compartir habitación no es un inconveniente: es parte esencial del
-              camino que vas a recorrer en este retiro. Muchas personas llegan
-              con dudas, y se sorprenden al descubrir que los momentos más
-              significativos ocurren justamente allí.
+              Compartir habitación no es una obligación, es una posibilidad que
+              tú eliges. Puedes vivir esta experiencia de manera individual o
+              acompañada, según lo que necesites para tu proceso. Ambas opciones
+              son válidas y respetadas.
             </p>
             <p>
-              Nuestras habitaciones compartidas están diseñadas para ofrecer
-              comodidad, armonía y respeto, con normas claras de convivencia y
-              silencio. Este formato reduce el aislamiento, crea comunidad y
-              potencia tu proceso emocional. Solo son dos noches en un ambiente
-              seguro y profesional.
+              Quienes eligen compartir descubren algo importante: en ese espacio
+              nacen conversaciones auténticas, apoyo real y vínculos que, en
+              experiencias anteriores, han trascendido el retiro y se han
+              convertido en amistades profundas. No se fuerza nada; simplemente
+              ocurre en un ambiente contenido y seguro.
+            </p>
+            <p>
+              Las habitaciones compartidas ofrecen comodidad, silencio, normas
+              claras de convivencia y un protocolo de descanso y seguridad para
+              todos. Además, no se mezclan hombres y mujeres. El tiempo dentro
+              del retiro es limitado y la mayor parte de la jornada transcurre
+              en actividades terapéuticas, por lo que estos espacios están
+              pensados únicamente para el descanso, la contención y el cuidado
+              personal.
+            </p>
+            <p>
+              Compartir no te quita intimidad. Bien acompañado, tu proceso puede
+              incluso profundizarse.
             </p>
           </div>
         </div>
@@ -132,14 +145,27 @@ const categories = Object.keys(groupedAccommodations);
                     <h3 class='card-title'>{accommodation.title}</h3>
                     <p class='card-description'>{accommodation.description}</p>
 
+                    {accommodation.sharedNote && (
+                      <div class='shared-note-badge'>
+                        <span class='note-icon'>👥</span>
+                        <span class='note-text'>Solo mujeres / Solo hombres (no mixto)</span>
+                      </div>
+                    )}
+
                     <div class='card-footer'>
                       <div class='price-container'>
-                        {(accommodation.priceSingle || accommodation.priceBunk || accommodation.priceCouple) ? (
+                        {(accommodation.priceSingle || accommodation.priceMezzanine || accommodation.priceBunk || accommodation.priceCouple) ? (
                           <div class='price-dual'>
                             <div class='price-row'>
-                              <span class='price-type'>{accommodation.priceBunk ? 'Cama king' : (accommodation.priceCouple ? 'Individual' : 'Cama doble')}</span>
+                              <span class='price-type'>{accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceCouple ? 'Individual' : 'Cama doble'))}</span>
                               <span class='price-amount'>{accommodation.price}</span>
                             </div>
+                            {accommodation.priceMezzanine && (
+                              <div class='price-row'>
+                                <span class='price-type'>Con acompañante</span>
+                                <span class='price-amount'>{accommodation.priceMezzanine}</span>
+                              </div>
+                            )}
                             {accommodation.priceSingle && (
                               <div class='price-row'>
                                 <span class='price-type'>Cama sencilla</span>
@@ -705,12 +731,36 @@ const categories = Object.keys(groupedAccommodations);
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex-grow: 1;
+  }
+
+  .shared-note-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201, 169, 97, 0.1);
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-radius: 4px;
+    padding: 0.6rem 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .note-icon {
+    font-size: 0.9rem;
+  }
+
+  .note-text {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    color: #c9a961;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   .card-footer {

@@ -43,12 +43,21 @@ const { accommodation } = Astro.props;
           {accommodation.title}
         </h1>
         <div class='hero-price'>
-          {(accommodation.priceSingle || accommodation.priceBunk || accommodation.priceCouple || accommodation.priceTwin) ? (
+          {(accommodation.priceSingle || accommodation.priceMezzanine || accommodation.priceBunk || accommodation.priceCouple || accommodation.priceTwin) ? (
             <div class='hero-price-dual'>
               <div class='hero-price-item'>
                 <span class='hero-price-amount'>{accommodation.price}</span>
-                <span class='per-person'>/ {accommodation.priceBunk ? 'cama king' : (accommodation.priceTwin ? 'cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'individual' : 'cama doble'))}</span>
+                <span class='per-person'>/ {accommodation.priceMezzanine ? 'uso individual' : (accommodation.priceBunk ? 'cama king' : (accommodation.priceTwin ? 'cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'individual' : 'cama doble')))}</span>
               </div>
+              {accommodation.priceMezzanine && (
+                <>
+                  <span class='price-separator'>|</span>
+                  <div class='hero-price-item'>
+                    <span class='hero-price-amount'>{accommodation.priceMezzanine}</span>
+                    <span class='per-person'>/ con acompañante</span>
+                  </div>
+                </>
+              )}
               {accommodation.priceTwin && (
                 <>
                   <span class='price-separator'>|</span>
@@ -116,6 +125,16 @@ const { accommodation } = Astro.props;
           <h2 class='section-title'>Descripción</h2>
           <p class='description-text'>{accommodation.description}</p>
 
+          {accommodation.sharedNote && (
+            <div class='shared-note'>
+              <div class='shared-note-icon'>⚠️</div>
+              <div class='shared-note-content'>
+                <strong>Aclaración importante:</strong>
+                <p>{accommodation.sharedNote.replace('Aclaración importante: ', '')}</p>
+              </div>
+            </div>
+          )}
+
           <div class='amenities-section'>
             <h3 class='subsection-title'>Comodidades</h3>
             <ul class='amenities-grid'>
@@ -135,12 +154,18 @@ const { accommodation } = Astro.props;
           <div class='booking-card'>
             <h3 class='card-title'>Reserva tu lugar</h3>
             <div class='price-display'>
-              {(accommodation.priceSingle || accommodation.priceBunk || accommodation.priceCouple || accommodation.priceTwin) ? (
+              {(accommodation.priceSingle || accommodation.priceMezzanine || accommodation.priceBunk || accommodation.priceCouple || accommodation.priceTwin) ? (
                 <div class='price-options'>
                   <div class='price-option'>
-                    <span class='option-label'>{accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'Individual' : 'Cama doble'))}</span>
+                    <span class='option-label'>{accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'Individual' : 'Cama doble')))}</span>
                     <span class='amount'>{accommodation.price}</span>
                   </div>
+                  {accommodation.priceMezzanine && (
+                    <div class='price-option'>
+                      <span class='option-label'>Con acompañante (mezanine)</span>
+                      <span class='amount'>{accommodation.priceMezzanine}</span>
+                    </div>
+                  )}
                   {accommodation.priceTwin && (
                     <div class='price-option'>
                       <span class='option-label'>Cama 1.20m</span>
@@ -401,7 +426,43 @@ const { accommodation } = Astro.props;
     font-size: 1.1rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+
+  .shared-note {
+    display: flex;
+    gap: 1rem;
+    background: rgba(201, 169, 97, 0.08);
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 4px;
+    padding: 1.5rem;
     margin-bottom: 4rem;
+  }
+
+  .shared-note-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .shared-note-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .shared-note-content strong {
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .shared-note-content p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
   }
 
   .subsection-title {
