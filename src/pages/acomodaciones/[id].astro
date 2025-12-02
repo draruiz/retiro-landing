@@ -12,6 +12,42 @@ export async function getStaticPaths() {
 }
 
 const { accommodation } = Astro.props;
+
+// Helper function to parse price value
+const parsePrice = (price: string) => {
+  const match = price.match(/[\d,]+/);
+  return match ? parseInt(match[0].replace(/,/g, '')) : 0;
+};
+
+// Build array of prices with labels and sort by value
+const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMezzanine || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
+
+const priceItems: { label: string; shortLabel: string; amount: string; value: number }[] = [];
+
+if (hasMultiplePrices) {
+  const baseLabel = accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'Individual' : 'Cama doble')));
+  const baseShortLabel = accommodation.priceMezzanine ? 'uso individual' : (accommodation.priceBunk ? 'cama king' : (accommodation.priceTwin ? 'cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'individual' : 'cama doble')));
+  priceItems.push({ label: baseLabel, shortLabel: baseShortLabel, amount: accommodation.price, value: parsePrice(accommodation.price) });
+  
+  if (accommodation.priceMezzanine) {
+    priceItems.push({ label: 'Con acompañante (mezanine)', shortLabel: 'con acompañante', amount: accommodation.priceMezzanine, value: parsePrice(accommodation.priceMezzanine) });
+  }
+  if (accommodation.priceTwin) {
+    priceItems.push({ label: 'Cama 1m', shortLabel: 'cama 1m', amount: accommodation.priceTwin, value: parsePrice(accommodation.priceTwin) });
+  }
+  if (accommodation.priceSingle) {
+    priceItems.push({ label: 'Mezzanine', shortLabel: 'mezzanine', amount: accommodation.priceSingle, value: parsePrice(accommodation.priceSingle) });
+  }
+  if (accommodation.priceBunk) {
+    priceItems.push({ label: 'Camarote', shortLabel: 'camarote', amount: accommodation.priceBunk, value: parsePrice(accommodation.priceBunk) });
+  }
+  if (accommodation.priceCouple) {
+    priceItems.push({ label: 'Parejas', shortLabel: 'parejas', amount: accommodation.priceCouple, value: parsePrice(accommodation.priceCouple) });
+  }
+  
+  // Sort by price value (lowest to highest)
+  priceItems.sort((a, b) => a.value - b.value);
+}
 ---
 
 <Layout>
@@ -43,57 +79,17 @@ const { accommodation } = Astro.props;
           {accommodation.title}
         </h1>
         <div class='hero-price'>
-          {(accommodation.priceSingle || accommodation.priceMezzanine || accommodation.priceBunk || accommodation.priceCouple || accommodation.priceTwin) ? (
+          {priceItems.length > 0 ? (
             <div class='hero-price-dual'>
-              <div class='hero-price-item'>
-                <span class='hero-price-amount'>{accommodation.price}</span>
-                <span class='per-person'>/ {accommodation.priceMezzanine ? 'uso individual' : (accommodation.priceBunk ? 'cama king' : (accommodation.priceTwin ? 'cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'individual' : 'cama doble')))}</span>
-              </div>
-              {accommodation.priceMezzanine && (
+              {priceItems.map((item, index) => (
                 <>
-                  <span class='price-separator'>|</span>
+                  {index > 0 && <span class='price-separator'>|</span>}
                   <div class='hero-price-item'>
-                    <span class='hero-price-amount'>{accommodation.priceMezzanine}</span>
-                    <span class='per-person'>/ con acompañante</span>
+                    <span class='hero-price-amount'>{item.amount}</span>
+                    <span class='per-person'>/ {item.shortLabel}</span>
                   </div>
                 </>
-              )}
-              {accommodation.priceTwin && (
-                <>
-                  <span class='price-separator'>|</span>
-                  <div class='hero-price-item'>
-                    <span class='hero-price-amount'>{accommodation.priceTwin}</span>
-                    <span class='per-person'>/ cama 1.20m</span>
-                  </div>
-                </>
-              )}
-              {accommodation.priceSingle && (
-                <>
-                  <span class='price-separator'>|</span>
-                  <div class='hero-price-item'>
-                    <span class='hero-price-amount'>{accommodation.priceSingle}</span>
-                    <span class='per-person'>/ cama sencilla</span>
-                  </div>
-                </>
-              )}
-              {accommodation.priceBunk && (
-                <>
-                  <span class='price-separator'>|</span>
-                  <div class='hero-price-item'>
-                    <span class='hero-price-amount'>{accommodation.priceBunk}</span>
-                    <span class='per-person'>/ camarote</span>
-                  </div>
-                </>
-              )}
-              {accommodation.priceCouple && (
-                <>
-                  <span class='price-separator'>|</span>
-                  <div class='hero-price-item'>
-                    <span class='hero-price-amount'>{accommodation.priceCouple}</span>
-                    <span class='per-person'>/ parejas</span>
-                  </div>
-                </>
-              )}
+              ))}
             </div>
           ) : (
             <>
@@ -154,42 +150,14 @@ const { accommodation } = Astro.props;
           <div class='booking-card'>
             <h3 class='card-title'>Reserva tu lugar</h3>
             <div class='price-display'>
-              {(accommodation.priceSingle || accommodation.priceMezzanine || accommodation.priceBunk || accommodation.priceCouple || accommodation.priceTwin) ? (
+              {priceItems.length > 0 ? (
                 <div class='price-options'>
-                  <div class='price-option'>
-                    <span class='option-label'>{accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'Individual' : 'Cama doble')))}</span>
-                    <span class='amount'>{accommodation.price}</span>
-                  </div>
-                  {accommodation.priceMezzanine && (
+                  {priceItems.map((item) => (
                     <div class='price-option'>
-                      <span class='option-label'>Con acompañante (mezanine)</span>
-                      <span class='amount'>{accommodation.priceMezzanine}</span>
+                      <span class='option-label'>{item.label}</span>
+                      <span class='amount'>{item.amount}</span>
                     </div>
-                  )}
-                  {accommodation.priceTwin && (
-                    <div class='price-option'>
-                      <span class='option-label'>Cama 1.20m</span>
-                      <span class='amount'>{accommodation.priceTwin}</span>
-                    </div>
-                  )}
-                  {accommodation.priceSingle && (
-                    <div class='price-option'>
-                      <span class='option-label'>Cama sencilla</span>
-                      <span class='amount'>{accommodation.priceSingle}</span>
-                    </div>
-                  )}
-                  {accommodation.priceBunk && (
-                    <div class='price-option'>
-                      <span class='option-label'>Camarote</span>
-                      <span class='amount'>{accommodation.priceBunk}</span>
-                    </div>
-                  )}
-                  {accommodation.priceCouple && (
-                    <div class='price-option'>
-                      <span class='option-label'>Parejas</span>
-                      <span class='amount'>{accommodation.priceCouple}</span>
-                    </div>
-                  )}
+                  ))}
                 </div>
               ) : (
                 <>

@@ -18,6 +18,42 @@ const groupedAccommodations = accommodations.reduce(
 );
 
 const categories = Object.keys(groupedAccommodations);
+
+// Helper function to parse price value
+const parsePrice = (price: string) => {
+  const match = price.match(/[\d,]+/);
+  return match ? parseInt(match[0].replace(/,/g, '')) : 0;
+};
+
+// Function to get sorted prices for an accommodation
+const getSortedPrices = (accommodation: typeof accommodations[0]) => {
+  const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMezzanine || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
+  
+  if (!hasMultiplePrices) return [];
+  
+  const priceItems: { label: string; amount: string; value: number; className?: string }[] = [];
+  
+  const baseLabel = accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple ? 'Individual' : 'Cama doble')));
+  priceItems.push({ label: baseLabel, amount: accommodation.price, value: parsePrice(accommodation.price) });
+  
+  if (accommodation.priceMezzanine) {
+    priceItems.push({ label: 'Con acompañante', amount: accommodation.priceMezzanine, value: parsePrice(accommodation.priceMezzanine) });
+  }
+  if (accommodation.priceTwin) {
+    priceItems.push({ label: 'Cama 1m', amount: accommodation.priceTwin, value: parsePrice(accommodation.priceTwin), className: 'twin' });
+  }
+  if (accommodation.priceSingle) {
+    priceItems.push({ label: 'Mezzanine', amount: accommodation.priceSingle, value: parsePrice(accommodation.priceSingle) });
+  }
+  if (accommodation.priceBunk) {
+    priceItems.push({ label: 'Camarote', amount: accommodation.priceBunk, value: parsePrice(accommodation.priceBunk) });
+  }
+  if (accommodation.priceCouple) {
+    priceItems.push({ label: 'Parejas', amount: accommodation.priceCouple, value: parsePrice(accommodation.priceCouple), className: 'couple' });
+  }
+  
+  return priceItems.sort((a, b) => a.value - b.value);
+};
 ---
 
 <Layout>
@@ -154,36 +190,14 @@ const categories = Object.keys(groupedAccommodations);
 
                     <div class='card-footer'>
                       <div class='price-container'>
-                        {(accommodation.priceSingle || accommodation.priceMezzanine || accommodation.priceBunk || accommodation.priceCouple) ? (
+                        {getSortedPrices(accommodation).length > 0 ? (
                           <div class='price-dual'>
-                            <div class='price-row'>
-                              <span class='price-type'>{accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceCouple ? 'Individual' : 'Cama doble'))}</span>
-                              <span class='price-amount'>{accommodation.price}</span>
-                            </div>
-                            {accommodation.priceMezzanine && (
+                            {getSortedPrices(accommodation).map((item) => (
                               <div class='price-row'>
-                                <span class='price-type'>Con acompañante</span>
-                                <span class='price-amount'>{accommodation.priceMezzanine}</span>
+                                <span class='price-type'>{item.label}</span>
+                                <span class={`price-amount ${item.className || ''}`}>{item.amount}</span>
                               </div>
-                            )}
-                            {accommodation.priceSingle && (
-                              <div class='price-row'>
-                                <span class='price-type'>Cama sencilla</span>
-                                <span class='price-amount'>{accommodation.priceSingle}</span>
-                              </div>
-                            )}
-                            {accommodation.priceBunk && (
-                              <div class='price-row'>
-                                <span class='price-type'>Camarote</span>
-                                <span class='price-amount'>{accommodation.priceBunk}</span>
-                              </div>
-                            )}
-                            {accommodation.priceCouple && (
-                              <div class='price-row'>
-                                <span class='price-type'>Parejas</span>
-                                <span class='price-amount couple'>{accommodation.priceCouple}</span>
-                              </div>
-                            )}
+                            ))}
                           </div>
                         ) : (
                           <>
