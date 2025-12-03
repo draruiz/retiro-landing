@@ -24,6 +24,9 @@ const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMe
 
 const priceItems: { label: string; shortLabel: string; amount: string; value: number }[] = [];
 
+// Helper to format USD currency
+const formatUSD = (amount: number) => `USD $${amount.toLocaleString('en-US')}`;
+
 if (hasMultiplePrices) {
   const baseLabel = accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'Individual' : 'Cama doble')));
   const baseShortLabel = accommodation.priceMezzanine ? 'uso individual' : (accommodation.priceBunk ? 'cama king' : (accommodation.priceTwin ? 'cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'individual' : 'cama doble')));
@@ -143,6 +146,95 @@ if (hasMultiplePrices) {
                 ))
               }
             </ul>
+          </div>
+
+          <!-- Payment Plan Section -->
+          <div class='payment-plan-section'>
+            <h2 class='section-title'>Plan de Pago – Retiro Calma</h2>
+            <p class='payment-intro'>
+              Para facilitar tu inscripción, contamos con un sistema de pago en <strong>4 cuotas</strong> con reserva del 20%.
+            </p>
+
+            <div class='payment-how-it-works'>
+              <h4 class='how-title'>✅ Cómo funciona</h4>
+              <ul class='how-list'>
+                <li><strong>20%</strong> para reservar tu cupo</li>
+                <li>El <strong>80%</strong> restante se divide en 3 cuotas iguales</li>
+                <li>El 100% debe estar totalmente pagado <strong>antes del 15 de abril</strong></li>
+                <li>La reserva <strong>no es reembolsable</strong></li>
+                <li>Cupos limitados por tipo de habitación</li>
+              </ul>
+            </div>
+
+            <div class='payment-examples'>
+              <h4 class='examples-title'>🔹 Ejemplo de Plan de Pago</h4>
+              
+              {priceItems.length > 0 ? (
+                priceItems.map((item) => {
+                  const totalPrice = item.value;
+                  const reserva = Math.round(totalPrice * 0.20);
+                  const cuota = Math.round((totalPrice * 0.80) / 3);
+                  return (
+                    <div class='example-card'>
+                      <div class='example-header'>
+                        <span class='example-badge'>{item.label}</span>
+                        <span class='example-total'>{formatUSD(totalPrice)}</span>
+                      </div>
+                      <div class='example-breakdown'>
+                        <div class='breakdown-item'>
+                          <span class='breakdown-label'>Reserva (20%):</span>
+                          <span class='breakdown-amount'>{formatUSD(reserva)}</span>
+                        </div>
+                        <div class='breakdown-item'>
+                          <span class='breakdown-label'>Cuota 2:</span>
+                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                        </div>
+                        <div class='breakdown-item'>
+                          <span class='breakdown-label'>Cuota 3:</span>
+                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                        </div>
+                        <div class='breakdown-item highlight'>
+                          <span class='breakdown-label'>Cuota 4 (límite 15 abril):</span>
+                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                (() => {
+                  const totalPrice = parsePrice(accommodation.price);
+                  const reserva = Math.round(totalPrice * 0.20);
+                  const cuota = Math.round((totalPrice * 0.80) / 3);
+                  return (
+                    <div class='example-card'>
+                      <div class='example-header'>
+                        <span class='example-badge'>Por persona</span>
+                        <span class='example-total'>{formatUSD(totalPrice)}</span>
+                      </div>
+                      <div class='example-breakdown'>
+                        <div class='breakdown-item'>
+                          <span class='breakdown-label'>Reserva (20%):</span>
+                          <span class='breakdown-amount'>{formatUSD(reserva)}</span>
+                        </div>
+                        <div class='breakdown-item'>
+                          <span class='breakdown-label'>Cuota 2:</span>
+                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                        </div>
+                        <div class='breakdown-item'>
+                          <span class='breakdown-label'>Cuota 3:</span>
+                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                        </div>
+                        <div class='breakdown-item highlight'>
+                          <span class='breakdown-label'>Cuota 4 (límite 15 abril):</span>
+                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()
+              )}
+            </div>
           </div>
         </div>
 
@@ -462,6 +554,155 @@ if (hasMultiplePrices) {
     color: var(--color-accent);
   }
 
+  /* Payment Plan Section */
+  .payment-plan-section {
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .payment-intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+
+  .payment-intro strong {
+    color: var(--color-accent);
+  }
+
+  .payment-how-it-works {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .how-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .how-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .how-list li {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .how-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .how-list li strong {
+    color: var(--color-accent);
+  }
+
+  .payment-examples {
+    margin-top: 2rem;
+  }
+
+  .examples-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .example-card {
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.08) 0%, rgba(201, 169, 97, 0.02) 100%);
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .example-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+  }
+
+  .example-badge {
+    background: var(--color-accent);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+  }
+
+  .example-total {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .example-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  .breakdown-item.highlight {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .breakdown-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+  }
+
+  .breakdown-item.highlight .breakdown-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+
+  .breakdown-amount {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .breakdown-item.highlight .breakdown-amount {
+    font-size: 1.2rem;
+  }
+
   /* Sidebar */
   .booking-card {
     background: var(--color-dark-card);
@@ -583,6 +824,27 @@ if (hasMultiplePrices) {
     }
     .booking-card {
       position: static;
+    }
+    .payment-plan-section {
+      margin-top: 3rem;
+      padding-top: 3rem;
+    }
+    .payment-how-it-works {
+      padding: 1.5rem;
+    }
+    .example-card {
+      padding: 1.25rem;
+    }
+    .example-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .example-total {
+      font-size: 1.3rem;
+    }
+    .breakdown-amount {
+      font-size: 1rem;
     }
   }
 </style>
