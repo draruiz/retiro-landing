@@ -25,31 +25,46 @@ const parsePrice = (price: string) => {
   return match ? parseInt(match[0].replace(/,/g, '')) : 0;
 };
 
+// Exchange rate USD to COP (approximate)
+const USD_TO_COP = 3800;
+
+// Helper to format COP currency
+const formatCOP = (usdAmount: number) => {
+  const copAmount = Math.round(usdAmount * USD_TO_COP);
+  return `$${copAmount.toLocaleString('es-CO')} COP`;
+};
+
 // Function to get sorted prices for an accommodation
 const getSortedPrices = (accommodation: typeof accommodations[0]) => {
   const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMezzanine || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
   
   if (!hasMultiplePrices) return [];
   
-  const priceItems: { label: string; amount: string; value: number; className?: string }[] = [];
+  const priceItems: { label: string; amount: string; amountCOP: string; value: number; className?: string }[] = [];
   
   const baseLabel = accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple ? 'Individual' : 'Cama doble')));
-  priceItems.push({ label: baseLabel, amount: accommodation.price, value: parsePrice(accommodation.price) });
+  const baseValue = parsePrice(accommodation.price);
+  priceItems.push({ label: baseLabel, amount: accommodation.price, amountCOP: formatCOP(baseValue), value: baseValue });
   
   if (accommodation.priceMezzanine) {
-    priceItems.push({ label: 'Con acompañante', amount: accommodation.priceMezzanine, value: parsePrice(accommodation.priceMezzanine) });
+    const val = parsePrice(accommodation.priceMezzanine);
+    priceItems.push({ label: 'Con acompañante', amount: accommodation.priceMezzanine, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceTwin) {
-    priceItems.push({ label: 'Cama 1m', amount: accommodation.priceTwin, value: parsePrice(accommodation.priceTwin), className: 'twin' });
+    const val = parsePrice(accommodation.priceTwin);
+    priceItems.push({ label: 'Cama 1m', amount: accommodation.priceTwin, amountCOP: formatCOP(val), value: val, className: 'twin' });
   }
   if (accommodation.priceSingle) {
-    priceItems.push({ label: 'Mezzanine', amount: accommodation.priceSingle, value: parsePrice(accommodation.priceSingle) });
+    const val = parsePrice(accommodation.priceSingle);
+    priceItems.push({ label: 'Mezzanine', amount: accommodation.priceSingle, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceBunk) {
-    priceItems.push({ label: 'Camarote', amount: accommodation.priceBunk, value: parsePrice(accommodation.priceBunk) });
+    const val = parsePrice(accommodation.priceBunk);
+    priceItems.push({ label: 'Camarote', amount: accommodation.priceBunk, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceCouple) {
-    priceItems.push({ label: 'Parejas', amount: accommodation.priceCouple, value: parsePrice(accommodation.priceCouple), className: 'couple' });
+    const val = parsePrice(accommodation.priceCouple);
+    priceItems.push({ label: 'Parejas', amount: accommodation.priceCouple, amountCOP: formatCOP(val), value: val, className: 'couple' });
   }
   
   return priceItems.sort((a, b) => a.value - b.value);
@@ -195,7 +210,10 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
                             {getSortedPrices(accommodation).map((item) => (
                               <div class='price-row'>
                                 <span class='price-type'>{item.label}</span>
-                                <span class={`price-amount ${item.className || ''}`}>{item.amount}</span>
+                                <div class='price-amounts'>
+                                  <span class={`price-amount ${item.className || ''}`}>{item.amount}</span>
+                                  <span class='price-cop'>{item.amountCOP}</span>
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -205,6 +223,7 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
                               {accommodation.priceLabel}
                             </span>
                             <span class='price-amount'>{accommodation.price}</span>
+                            <span class='price-cop'>{formatCOP(parsePrice(accommodation.price))}</span>
                           </>
                         )}
                       </div>
@@ -833,6 +852,25 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
 
   .price-dual .price-amount.couple {
     color: #c9a961;
+  }
+
+  .price-amounts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+  }
+
+  .price-cop {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 400;
+  }
+
+  .price-container > .price-cop {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
   }
 
   .arrow-icon {

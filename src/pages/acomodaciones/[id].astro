@@ -22,30 +22,45 @@ const parsePrice = (price: string) => {
 // Build array of prices with labels and sort by value
 const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMezzanine || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
 
-const priceItems: { label: string; shortLabel: string; amount: string; value: number }[] = [];
+const priceItems: { label: string; shortLabel: string; amount: string; amountCOP: string; value: number }[] = [];
 
 // Helper to format USD currency
 const formatUSD = (amount: number) => `USD $${amount.toLocaleString('en-US')}`;
 
+// Exchange rate USD to COP (approximate)
+const USD_TO_COP = 3800;
+
+// Helper to format COP currency
+const formatCOP = (usdAmount: number) => {
+  const copAmount = Math.round(usdAmount * USD_TO_COP);
+  return `$${copAmount.toLocaleString('es-CO')} COP`;
+};
+
 if (hasMultiplePrices) {
   const baseLabel = accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'Individual' : 'Cama doble')));
   const baseShortLabel = accommodation.priceMezzanine ? 'uso individual' : (accommodation.priceBunk ? 'cama king' : (accommodation.priceTwin ? 'cama 1.60m' : (accommodation.priceCouple && !accommodation.priceSingle ? 'individual' : 'cama doble')));
-  priceItems.push({ label: baseLabel, shortLabel: baseShortLabel, amount: accommodation.price, value: parsePrice(accommodation.price) });
+  const baseValue = parsePrice(accommodation.price);
+  priceItems.push({ label: baseLabel, shortLabel: baseShortLabel, amount: accommodation.price, amountCOP: formatCOP(baseValue), value: baseValue });
   
   if (accommodation.priceMezzanine) {
-    priceItems.push({ label: 'Con acompañante (mezanine)', shortLabel: 'con acompañante', amount: accommodation.priceMezzanine, value: parsePrice(accommodation.priceMezzanine) });
+    const val = parsePrice(accommodation.priceMezzanine);
+    priceItems.push({ label: 'Con acompañante (mezanine)', shortLabel: 'con acompañante', amount: accommodation.priceMezzanine, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceTwin) {
-    priceItems.push({ label: 'Cama 1m', shortLabel: 'cama 1m', amount: accommodation.priceTwin, value: parsePrice(accommodation.priceTwin) });
+    const val = parsePrice(accommodation.priceTwin);
+    priceItems.push({ label: 'Cama 1m', shortLabel: 'cama 1m', amount: accommodation.priceTwin, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceSingle) {
-    priceItems.push({ label: 'Mezzanine', shortLabel: 'mezzanine', amount: accommodation.priceSingle, value: parsePrice(accommodation.priceSingle) });
+    const val = parsePrice(accommodation.priceSingle);
+    priceItems.push({ label: 'Mezzanine', shortLabel: 'mezzanine', amount: accommodation.priceSingle, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceBunk) {
-    priceItems.push({ label: 'Camarote', shortLabel: 'camarote', amount: accommodation.priceBunk, value: parsePrice(accommodation.priceBunk) });
+    const val = parsePrice(accommodation.priceBunk);
+    priceItems.push({ label: 'Camarote', shortLabel: 'camarote', amount: accommodation.priceBunk, amountCOP: formatCOP(val), value: val });
   }
   if (accommodation.priceCouple) {
-    priceItems.push({ label: 'Parejas', shortLabel: 'parejas', amount: accommodation.priceCouple, value: parsePrice(accommodation.priceCouple) });
+    const val = parsePrice(accommodation.priceCouple);
+    priceItems.push({ label: 'Parejas', shortLabel: 'parejas', amount: accommodation.priceCouple, amountCOP: formatCOP(val), value: val });
   }
   
   // Sort by price value (lowest to highest)
@@ -88,17 +103,21 @@ if (hasMultiplePrices) {
                 <>
                   {index > 0 && <span class='price-separator'>|</span>}
                   <div class='hero-price-item'>
-                    <span class='hero-price-amount'>{item.amount}</span>
+                    <div class='hero-price-stack'>
+                      <span class='hero-price-amount'>{item.amount}</span>
+                      <span class='hero-price-cop'>{item.amountCOP}</span>
+                    </div>
                     <span class='per-person'>/ {item.shortLabel}</span>
                   </div>
                 </>
               ))}
             </div>
           ) : (
-            <>
-              {accommodation.price}
+            <div class='hero-price-single'>
+              <span class='hero-price-amount'>{accommodation.price}</span>
+              <span class='hero-price-cop'>{formatCOP(parsePrice(accommodation.price))}</span>
               <span class='per-person'>/ persona</span>
-            </>
+            </div>
           )}
         </div>
       </div>
@@ -178,24 +197,39 @@ if (hasMultiplePrices) {
                     <div class='example-card'>
                       <div class='example-header'>
                         <span class='example-badge'>{item.label}</span>
-                        <span class='example-total'>{formatUSD(totalPrice)}</span>
+                        <div class='example-total-container'>
+                          <span class='example-total'>{formatUSD(totalPrice)}</span>
+                          <span class='example-total-cop'>{formatCOP(totalPrice)}</span>
+                        </div>
                       </div>
                       <div class='example-breakdown'>
                         <div class='breakdown-item'>
                           <span class='breakdown-label'>Reserva (20%):</span>
-                          <span class='breakdown-amount'>{formatUSD(reserva)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(reserva)}</span>
+                            <span class='breakdown-cop'>{formatCOP(reserva)}</span>
+                          </div>
                         </div>
                         <div class='breakdown-item'>
                           <span class='breakdown-label'>Cuota 2:</span>
-                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                            <span class='breakdown-cop'>{formatCOP(cuota)}</span>
+                          </div>
                         </div>
                         <div class='breakdown-item'>
                           <span class='breakdown-label'>Cuota 3:</span>
-                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                            <span class='breakdown-cop'>{formatCOP(cuota)}</span>
+                          </div>
                         </div>
                         <div class='breakdown-item highlight'>
                           <span class='breakdown-label'>Cuota 4 (límite 15 abril):</span>
-                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                            <span class='breakdown-cop'>{formatCOP(cuota)}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -210,24 +244,39 @@ if (hasMultiplePrices) {
                     <div class='example-card'>
                       <div class='example-header'>
                         <span class='example-badge'>Por persona</span>
-                        <span class='example-total'>{formatUSD(totalPrice)}</span>
+                        <div class='example-total-container'>
+                          <span class='example-total'>{formatUSD(totalPrice)}</span>
+                          <span class='example-total-cop'>{formatCOP(totalPrice)}</span>
+                        </div>
                       </div>
                       <div class='example-breakdown'>
                         <div class='breakdown-item'>
                           <span class='breakdown-label'>Reserva (20%):</span>
-                          <span class='breakdown-amount'>{formatUSD(reserva)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(reserva)}</span>
+                            <span class='breakdown-cop'>{formatCOP(reserva)}</span>
+                          </div>
                         </div>
                         <div class='breakdown-item'>
                           <span class='breakdown-label'>Cuota 2:</span>
-                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                            <span class='breakdown-cop'>{formatCOP(cuota)}</span>
+                          </div>
                         </div>
                         <div class='breakdown-item'>
                           <span class='breakdown-label'>Cuota 3:</span>
-                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                            <span class='breakdown-cop'>{formatCOP(cuota)}</span>
+                          </div>
                         </div>
                         <div class='breakdown-item highlight'>
                           <span class='breakdown-label'>Cuota 4 (límite 15 abril):</span>
-                          <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                          <div class='breakdown-amounts'>
+                            <span class='breakdown-amount'>{formatUSD(cuota)}</span>
+                            <span class='breakdown-cop'>{formatCOP(cuota)}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -248,12 +297,14 @@ if (hasMultiplePrices) {
                     <div class='price-option'>
                       <span class='option-label'>{item.label}</span>
                       <span class='amount'>{item.amount}</span>
+                      <span class='amount-cop'>{item.amountCOP}</span>
                     </div>
                   ))}
                 </div>
               ) : (
                 <>
                   <span class='amount'>{accommodation.price}</span>
+                  <span class='amount-cop'>{formatCOP(parsePrice(accommodation.price))}</span>
                   <span class='period'>{accommodation.priceLabel}</span>
                 </>
               )}
@@ -434,6 +485,36 @@ if (hasMultiplePrices) {
   .price-separator {
     color: rgba(255, 255, 255, 0.3);
     font-size: 2rem;
+  }
+
+  .hero-price-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-price-cop {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+  }
+
+  .hero-price-single {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .hero-price-single .hero-price-amount {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-price-single .per-person {
+    margin-top: 0.5rem;
   }
 
   /* Gallery */
@@ -624,8 +705,18 @@ if (hasMultiplePrices) {
     font-family: var(--font-heading);
     font-size: 1.3rem;
     color: var(--color-accent);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     letter-spacing: 0.02em;
+  }
+
+  .trm-note {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid rgba(201, 169, 97, 0.3);
   }
 
   .example-card {
@@ -703,6 +794,33 @@ if (hasMultiplePrices) {
     font-size: 1.2rem;
   }
 
+  .example-total-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .example-total-cop {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+  }
+
+  .breakdown-amounts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+  }
+
+  .breakdown-cop {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 400;
+  }
+
   /* Sidebar */
   .booking-card {
     background: var(--color-dark-card);
@@ -766,6 +884,15 @@ if (hasMultiplePrices) {
 
   .price-options .amount {
     font-size: 1.75rem;
+  }
+
+  .amount-cop {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 400;
+    display: block;
+    margin-top: 0.1rem;
   }
 
   .booking-note {
