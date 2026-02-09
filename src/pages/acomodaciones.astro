@@ -206,28 +206,9 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
                     )}
 
                     <div class='card-footer'>
-                      <div class='price-container'>
-                        {getSortedPrices(accommodation).length > 0 ? (
-                          <div class='price-dual'>
-                            {getSortedPrices(accommodation).map((item) => (
-                              <div class='price-row'>
-                                <span class='price-type'>{item.label}</span>
-                                <div class='price-amounts'>
-                                  <span class={`price-amount ${item.className || ''}`}>{item.amount}</span>
-                                  <span class='price-cop'>{item.amountCOP}</span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <>
-                            <span class='price-label'>
-                              {accommodation.priceLabel}
-                            </span>
-                            <span class='price-amount'>{accommodation.price}</span>
-                            <span class='price-cop'>{formatCOP(parsePrice(accommodation.price))}</span>
-                          </>
-                        )}
+                      <div class='sold-out-badge'>
+                        <span class='sold-out-icon'>✨</span>
+                        <span class='sold-out-text'>Sold Out</span>
                       </div>
                       <button 
                         class='waitlist-button-card'
@@ -932,6 +913,42 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
   .price-container > .price-cop {
     font-size: 0.75rem;
     margin-top: 0.25rem;
+  }
+
+  /* Sold Out Badge in Footer */
+  .sold-out-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(201, 169, 97, 0.15);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+  }
+
+  .sold-out-icon {
+    font-size: 1.1rem;
+    animation: pulse-icon 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-icon {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.15);
+    }
+  }
+
+  .sold-out-text {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #c9a961;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   /* Waitlist Button for Cards */
