@@ -15,7 +15,7 @@ const groupedAccommodations = accommodations.reduce(
     acc[item.category].push(item);
     return acc;
   },
-  {} as Record<string, typeof accommodations>
+  {} as Record<string, typeof accommodations>,
 );
 
 const categories = Object.keys(groupedAccommodations);
@@ -23,7 +23,7 @@ const categories = Object.keys(groupedAccommodations);
 // Helper function to parse price value
 const parsePrice = (price: string) => {
   const match = price.match(/[\d,]+/);
-  return match ? parseInt(match[0].replace(/,/g, '')) : 0;
+  return match ? parseInt(match[0].replace(/,/g, "")) : 0;
 };
 
 // Exchange rate USD to COP (approximate)
@@ -32,42 +32,93 @@ const USD_TO_COP = 3800;
 // Helper to format COP currency
 const formatCOP = (usdAmount: number) => {
   const copAmount = Math.round(usdAmount * USD_TO_COP);
-  return `$${copAmount.toLocaleString('es-CO')} COP`;
+  return `$${copAmount.toLocaleString("es-CO")} COP`;
 };
 
 // Function to get sorted prices for an accommodation
-const getSortedPrices = (accommodation: typeof accommodations[0]) => {
-  const hasMultiplePrices = !!accommodation.priceSingle || !!accommodation.priceMezzanine || !!accommodation.priceBunk || !!accommodation.priceCouple || !!accommodation.priceTwin;
-  
+const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
+  const hasMultiplePrices =
+    !!accommodation.priceSingle ||
+    !!accommodation.priceMezzanine ||
+    !!accommodation.priceBunk ||
+    !!accommodation.priceCouple ||
+    !!accommodation.priceTwin;
+
   if (!hasMultiplePrices) return [];
-  
-  const priceItems: { label: string; amount: string; amountCOP: string; value: number; className?: string }[] = [];
-  
-  const baseLabel = accommodation.priceMezzanine ? 'Uso individual' : (accommodation.priceBunk ? 'Cama king' : (accommodation.priceTwin ? 'Cama 1.60m' : (accommodation.priceCouple ? 'Individual' : 'Cama doble')));
+
+  const priceItems: {
+    label: string;
+    amount: string;
+    amountCOP: string;
+    value: number;
+    className?: string;
+  }[] = [];
+
+  const baseLabel = accommodation.priceMezzanine
+    ? "Uso individual"
+    : accommodation.priceBunk
+      ? "Cama king"
+      : accommodation.priceTwin
+        ? "Cama 1.60m"
+        : accommodation.priceCouple
+          ? "Individual"
+          : "Cama doble";
   const baseValue = parsePrice(accommodation.price);
-  priceItems.push({ label: baseLabel, amount: accommodation.price, amountCOP: formatCOP(baseValue), value: baseValue });
-  
+  priceItems.push({
+    label: baseLabel,
+    amount: accommodation.price,
+    amountCOP: formatCOP(baseValue),
+    value: baseValue,
+  });
+
   if (accommodation.priceMezzanine) {
     const val = parsePrice(accommodation.priceMezzanine);
-    priceItems.push({ label: 'Con acompañante', amount: accommodation.priceMezzanine, amountCOP: formatCOP(val), value: val });
+    priceItems.push({
+      label: "Con acompañante",
+      amount: accommodation.priceMezzanine,
+      amountCOP: formatCOP(val),
+      value: val,
+    });
   }
   if (accommodation.priceTwin) {
     const val = parsePrice(accommodation.priceTwin);
-    priceItems.push({ label: 'Cama 1m', amount: accommodation.priceTwin, amountCOP: formatCOP(val), value: val, className: 'twin' });
+    priceItems.push({
+      label: "Cama 1m",
+      amount: accommodation.priceTwin,
+      amountCOP: formatCOP(val),
+      value: val,
+      className: "twin",
+    });
   }
   if (accommodation.priceSingle) {
     const val = parsePrice(accommodation.priceSingle);
-    priceItems.push({ label: 'Mezzanine', amount: accommodation.priceSingle, amountCOP: formatCOP(val), value: val });
+    priceItems.push({
+      label: "Mezzanine",
+      amount: accommodation.priceSingle,
+      amountCOP: formatCOP(val),
+      value: val,
+    });
   }
   if (accommodation.priceBunk) {
     const val = parsePrice(accommodation.priceBunk);
-    priceItems.push({ label: 'Camarote', amount: accommodation.priceBunk, amountCOP: formatCOP(val), value: val });
+    priceItems.push({
+      label: "Camarote",
+      amount: accommodation.priceBunk,
+      amountCOP: formatCOP(val),
+      value: val,
+    });
   }
   if (accommodation.priceCouple) {
     const val = parsePrice(accommodation.priceCouple);
-    priceItems.push({ label: 'Parejas', amount: accommodation.priceCouple, amountCOP: formatCOP(val), value: val, className: 'couple' });
+    priceItems.push({
+      label: "Parejas",
+      amount: accommodation.priceCouple,
+      amountCOP: formatCOP(val),
+      value: val,
+      className: "couple",
+    });
   }
-  
+
   return priceItems.sort((a, b) => a.value - b.value);
 };
 ---
@@ -93,7 +144,12 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
         <a href='/#actividades' class='navbar-link'>Actividades</a>
         <a href='/ubicacion' class='navbar-link'>Ubicación</a>
         <a href='/faq' class='navbar-link'>FAQ</a>
-        <a href='https://wa.me/573505381899' target='_blank' rel='noopener noreferrer' class='navbar-link navbar-cta'>Inscríbete</a>
+        <a
+          href='https://w.app/draruiz'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='navbar-link navbar-cta'>Inscríbete</a
+        >
       </div>
     </div>
   </nav>
@@ -185,13 +241,6 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
                     {accommodation.badge && (
                       <span class='premium-badge'>{accommodation.badge}</span>
                     )}
-                    <!-- Sold Out Overlay -->
-                    <div class='sold-out-overlay'>
-                      <div class='sold-out-label'>
-                        <span class='sold-out-icon'>✨</span>
-                        <span>Agotado</span>
-                      </div>
-                    </div>
                   </div>
 
                   <div class='card-content'>
@@ -201,21 +250,43 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
                     {accommodation.sharedNote && (
                       <div class='shared-note-badge'>
                         <span class='note-icon'>👥</span>
-                        <span class='note-text'>Solo mujeres / Solo hombres (no mixto)</span>
+                        <span class='note-text'>
+                          Solo mujeres / Solo hombres (no mixto)
+                        </span>
                       </div>
                     )}
 
                     <div class='card-footer'>
-                      <div class='sold-out-badge'>
-                        <span class='sold-out-icon'>✨</span>
-                        <span class='sold-out-text'>Sold Out</span>
-                      </div>
-                      <button 
-                        class='waitlist-button-card'
-                        onclick='window.openRetreatFormModal()'
-                        aria-label='Unirse a lista de espera'
+                      <a
+                        href={`/acomodaciones/${accommodation.id}`}
+                        class='details-button-card'
+                        aria-label='Ver detalles de la habitación'
                       >
-                        <span>Lista de Espera</span>
+                        <span>Ver Detalles</span>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='18'
+                          height='18'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          stroke-width='2'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                        >
+                          <circle cx='12' cy='12' r='10' />
+                          <line x1='12' y1='16' x2='12' y2='12' />
+                          <line x1='12' y1='8' x2='12.01' y2='8' />
+                        </svg>
+                      </a>
+                      <a
+                        href='https://w.app/draruiz'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        class='reserve-button-card'
+                        aria-label='Reservar habitación'
+                      >
+                        <span>Reservar</span>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           width='18'
@@ -230,7 +301,7 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
                           <line x1='5' y1='12' x2='19' y2='12' />
                           <polyline points='12 5 19 12 12 19' />
                         </svg>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -242,9 +313,9 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
 
       <div class='booking-note'>
         <p>
-          <strong>Nota:</strong> Todos los precios incluyen alojamiento completo
-          durante los 3 días del retiro, todas las comidas, actividades terapéuticas
-          y holísticas, materiales y acceso a todas las instalaciones.
+          <strong>Nota:</strong> Todos los precios incluyen alojamiento completo durante
+          los 3 días del retiro, todas las comidas, actividades terapéuticas y holísticas,
+          materiales y acceso a todas las instalaciones.
         </p>
       </div>
     </div>
@@ -529,7 +600,8 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(
+    background:
+      radial-gradient(
         ellipse at 20% 30%,
         rgba(201, 169, 97, 0.05) 0%,
         transparent 50%
@@ -692,58 +764,6 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
     z-index: 2;
   }
 
-  /* Sold Out Overlay */
-  .sold-out-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 10, 15, 0.85);
-    backdrop-filter: blur(3px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-  }
-
-  .sold-out-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: linear-gradient(
-      135deg,
-      rgba(201, 169, 97, 0.25) 0%,
-      rgba(201, 169, 97, 0.15) 100%
-    );
-    border: 2px solid rgba(201, 169, 97, 0.5);
-    padding: 1rem 2rem;
-    border-radius: 4px;
-    font-family: "Cormorant Garamond", serif;
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #c9a961;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    box-shadow: 0 4px 20px rgba(201, 169, 97, 0.3);
-  }
-
-  .sold-out-icon {
-    font-size: 1.5rem;
-    animation: pulse-sold-out 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-sold-out {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.8;
-      transform: scale(1.1);
-    }
-  }
-
   .card-overlay {
     position: absolute;
     top: 0;
@@ -841,7 +861,8 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
   .card-footer {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    gap: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 1.5rem;
   }
@@ -915,65 +936,30 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
     margin-top: 0.25rem;
   }
 
-  /* Sold Out Badge in Footer */
-  .sold-out-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: rgba(201, 169, 97, 0.15);
-    border: 1px solid rgba(201, 169, 97, 0.3);
-    padding: 0.75rem 1.25rem;
-    border-radius: 4px;
-  }
-
-  .sold-out-icon {
-    font-size: 1.1rem;
-    animation: pulse-icon 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-icon {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.7;
-      transform: scale(1.15);
-    }
-  }
-
-  .sold-out-text {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #c9a961;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  /* Waitlist Button for Cards */
-  .waitlist-button-card {
+  /* Reserve Button for Cards */
+  .reserve-button-card {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(201, 169, 97, 0.15);
-    border: 1px solid rgba(201, 169, 97, 0.3);
+    background: linear-gradient(135deg, #c9a961 0%, #a08238 100%);
+    border: 1px solid #c9a961;
     padding: 0.75rem 1.25rem;
     border-radius: 4px;
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #c9a961;
+    color: #0a0a0f;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
   }
 
-  .waitlist-button-card::before {
-    content: '';
+  .reserve-button-card::before {
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -982,29 +968,87 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(201, 169, 97, 0.2),
+      rgba(255, 255, 255, 0.2),
       transparent
     );
     transition: left 0.5s ease;
   }
 
-  .waitlist-button-card:hover::before {
+  .reserve-button-card:hover::before {
     left: 100%;
   }
 
-  .waitlist-button-card:hover {
-    background: rgba(201, 169, 97, 0.25);
-    border-color: rgba(201, 169, 97, 0.5);
+  .reserve-button-card:hover {
+    background: linear-gradient(135deg, #d4b66d 0%, #c9a961 100%);
+    border-color: #d4b66d;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(201, 169, 97, 0.2);
+    box-shadow: 0 5px 15px rgba(201, 169, 97, 0.4);
   }
 
-  .waitlist-button-card svg {
+  .reserve-button-card svg {
     transition: transform 0.3s ease;
   }
 
-  .waitlist-button-card:hover svg {
+  .reserve-button-card:hover svg {
     transform: translateX(3px);
+  }
+
+  /* Details Button for Cards */
+  .details-button-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .details-button-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .details-button-card:hover::before {
+    left: 100%;
+  }
+
+  .details-button-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(201, 169, 97, 0.4);
+    color: #c9a961;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .details-button-card svg {
+    transition: transform 0.3s ease;
+  }
+
+  .details-button-card:hover svg {
+    transform: scale(1.1);
   }
 
   .arrow-icon {
@@ -1084,6 +1128,17 @@ const getSortedPrices = (accommodation: typeof accommodations[0]) => {
 
     .rooms-grid {
       grid-template-columns: 1fr;
+    }
+
+    .card-footer {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .details-button-card,
+    .reserve-button-card {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>
