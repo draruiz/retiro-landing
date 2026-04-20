@@ -102,14 +102,21 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const heroBg = document.getElementById("hero-bg");
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
-        // Simple Scroll Parallax
-        window.addEventListener("scroll", () => {
-          const scrolled = window.scrollY;
-          if (heroBg && scrolled < window.innerHeight) {
-            heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
-          }
-        });
+        // Simple Scroll Parallax (disabled on touch devices for smooth scrolling)
+        if (!isTouchDevice && heroBg) {
+          window.addEventListener(
+            "scroll",
+            () => {
+              const scrolled = window.scrollY;
+              if (scrolled < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+              }
+            },
+            { passive: true },
+          );
+        }
       });
     </script>
 
@@ -816,7 +823,7 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
       background: var(--color-dark);
       color: rgba(255, 255, 255, 0.95);
       line-height: 1.6;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* Navbar */
@@ -1006,8 +1013,7 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
       justify-content: center;
       text-align: center;
       color: rgba(255, 255, 255, 0.95);
-      overflow: hidden;
-      perspective: 1000px;
+      overflow: clip;
     }
 
     .hero-bg-wrapper {
@@ -3621,13 +3627,17 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
       const navbarLinks = document.querySelectorAll(".navbar-link");
 
       // Navbar scroll effect
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        },
+        { passive: true },
+      );
 
       // Mobile menu toggle
       navbarToggle?.addEventListener("click", () => {
@@ -3695,24 +3705,28 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
 
       // Active link highlighting
       const sections = document.querySelectorAll("section[id]");
-      window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach((section) => {
-          const sectionTop = (section as HTMLElement).offsetTop;
-          const sectionHeight = (section as HTMLElement).clientHeight;
-          if (window.scrollY >= sectionTop - 100) {
-            current = section.getAttribute("id") || "";
-          }
-        });
+      window.addEventListener(
+        "scroll",
+        () => {
+          let current = "";
+          sections.forEach((section) => {
+            const sectionTop = (section as HTMLElement).offsetTop;
+            const sectionHeight = (section as HTMLElement).clientHeight;
+            if (window.scrollY >= sectionTop - 100) {
+              current = section.getAttribute("id") || "";
+            }
+          });
 
-        navbarLinks.forEach((link) => {
-          link.classList.remove("active");
-          const href = link.getAttribute("href");
-          if (href === `#${current}`) {
-            link.classList.add("active");
-          }
-        });
-      });
+          navbarLinks.forEach((link) => {
+            link.classList.remove("active");
+            const href = link.getAttribute("href");
+            if (href === `#${current}`) {
+              link.classList.add("active");
+            }
+          });
+        },
+        { passive: true },
+      );
     });
   </script>
 </Layout>
