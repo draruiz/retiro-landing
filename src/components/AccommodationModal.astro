@@ -1,5 +1,5 @@
 ---
-
+import SoldOutBadge from "./SoldOutBadge.astro";
 ---
 
 <div id='accommodation-modal' class='modal-backdrop' aria-hidden='true'>
@@ -54,12 +54,15 @@
           <div class='price-block'>
             <span id='modal-price-label' class='price-label'></span>
             <span id='modal-price' class='price-amount'></span>
+            <div class='modal-soldout'>
+              <SoldOutBadge variant='compact' align='left' label='Agotado' />
+            </div>
           </div>
           <a
-            href='https://wa.me/573505381899'
+            href='https://transforma-tu-interior.almaymente.io'
             target='_blank'
             rel='noopener noreferrer'
-            class='book-btn'>Reservar Ahora</a
+            class='book-btn'>Ver Próximo Retiro</a
           >
         </div>
       </div>
@@ -264,6 +267,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -271,6 +276,10 @@
   .price-block {
     display: flex;
     flex-direction: column;
+  }
+
+  .modal-soldout {
+    margin-top: 0.6rem;
   }
 
   .price-label {

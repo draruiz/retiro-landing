@@ -3,6 +3,7 @@ import backgroundStars from "../assets/backgorund.png";
 import mainLogo from "../assets/main_logo_brain.png";
 import Footer from "../components/Footer.astro";
 import RetreatFormModal from "../components/RetreatFormModal.astro";
+import SoldOutBadge from "../components/SoldOutBadge.astro";
 import { accommodations } from "../data/accommodations";
 import Layout from "../layouts/Layout.astro";
 
@@ -145,10 +146,10 @@ const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
         <a href='/ubicacion' class='navbar-link'>Ubicación</a>
         <a href='/faq' class='navbar-link'>FAQ</a>
         <a
-          href='https://wa.me/573505381899'
+          href='https://transforma-tu-interior.almaymente.io'
           target='_blank'
           rel='noopener noreferrer'
-          class='navbar-link navbar-cta'>Inscríbete</a
+          class='navbar-link navbar-cta'>Ver Próximo Retiro</a
         >
       </div>
     </div>
@@ -178,6 +179,12 @@ const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
 
     <div class='container content-wrapper'>
       <div class='acomodaciones-intro'>
+        <div class='intro-soldout'>
+          <SoldOutBadge
+            label='Todas las habitaciones agotadas'
+            note='El retiro de Noviembre 2026 ya está completo.'
+          />
+        </div>
         <p>
           Elige la habitación perfecta para tu experiencia de renovación y
           descanso. Todas las habitaciones incluyen acceso completo a las
@@ -241,6 +248,7 @@ const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
                     {accommodation.badge && (
                       <span class='premium-badge'>{accommodation.badge}</span>
                     )}
+                    <span class='card-soldout-ribbon'>Agotado</span>
                   </div>
 
                   <div class='card-content'>
@@ -280,13 +288,13 @@ const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
                         </svg>
                       </a>
                       <a
-                        href='https://wa.me/573505381899'
+                        href='https://transforma-tu-interior.almaymente.io'
                         target='_blank'
                         rel='noopener noreferrer'
                         class='reserve-button-card'
-                        aria-label='Reservar habitación'
+                        aria-label='Ver próximo retiro'
                       >
-                        <span>Reservar</span>
+                        <span>Ver Próximo Retiro</span>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           width='18'
@@ -764,6 +772,41 @@ const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
     z-index: 2;
   }
 
+  .card-soldout-ribbon {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #e05a5a 0%, #b42d2d 100%);
+    color: #fff;
+    padding: 0.3rem 0.85rem;
+    border-radius: 3px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    box-shadow: 0 4px 14px rgba(180, 45, 45, 0.45);
+    z-index: 3;
+  }
+
+  .card-image-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 15, 0.35);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .intro-soldout {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
   .card-overlay {
     position: absolute;
     top: 0;
@@ -862,9 +905,15 @@ const getSortedPrices = (accommodation: (typeof accommodations)[0]) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 1.5rem;
+  }
+
+  .card-footer > a {
+    flex: 1 1 auto;
+    justify-content: center;
   }
 
   .price-container {

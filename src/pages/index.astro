@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import RetreatFormModal from "../components/RetreatFormModal.astro";
+import SoldOutBadge from "../components/SoldOutBadge.astro";
 import backgroundStars from "../assets/backgorund.png";
 import mainLogo from "../assets/main_logo_brain.png";
 import docAlejandra from "../assets/doc_alejandra-perfil_whatsapp.jpeg";
@@ -38,10 +39,10 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
         <a href='/ubicacion' class='navbar-link'>Ubicación</a>
         <a href='/faq' class='navbar-link'>FAQ</a>
         <a
-          href='https://wa.me/573505381899'
+          href='https://transforma-tu-interior.almaymente.io'
           target='_blank'
           rel='noopener noreferrer'
-          class='navbar-link navbar-cta'>Inscríbete</a
+          class='navbar-link navbar-cta'>Ver Próximo Retiro</a
         >
       </div>
     </div>
@@ -86,14 +87,22 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
           <span class='date-badge'>📅 Noviembre de 2026</span>
         </div>
 
+        <div class='hero-soldout reveal-opacity delay-3'>
+          <SoldOutBadge
+            variant='hero'
+            label='Cupos Agotados'
+            note='Este retiro ya está completo. Descubre nuestra próxima experiencia.'
+          />
+        </div>
+
         <div class='cta-wrapper reveal-opacity delay-4'>
           <a
-            href='https://wa.me/573505381899'
+            href='https://transforma-tu-interior.almaymente.io'
             target='_blank'
             rel='noopener noreferrer'
             class='cta-button'
           >
-            Reserva tu Espacio
+            Ver Próximo Retiro
           </a>
         </div>
       </div>
@@ -612,13 +621,16 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
           <p class='cta-text'>
             ¿Lista para escribir tu propia historia de transformación?
           </p>
+          <div class='cta-soldout'>
+            <SoldOutBadge label='Cupos Agotados' />
+          </div>
           <a
-            href='https://wa.me/573505381899'
+            href='https://transforma-tu-interior.almaymente.io'
             target='_blank'
             rel='noopener noreferrer'
             class='cta-button-testimonials'
           >
-            Reserva tu Espacio Ahora
+            Ver Próximo Retiro
           </a>
         </div>
       </div>
@@ -763,17 +775,24 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
       <div class='container'>
         <div class='cta-content'>
           <h2 class='cta-title'>Tu Viaje hacia la Serenidad Comienza Aquí</h2>
-          <p class='cta-subtitle'>Plazas limitadas · Noviembre de 2026</p>
+          <p class='cta-subtitle'>Cupos agotados · Noviembre de 2026</p>
+          <div class='cta-soldout'>
+            <SoldOutBadge
+              label='Agotado'
+              note='Las inscripciones para este retiro están cerradas.'
+            />
+          </div>
           <a
-            href='https://wa.me/573505381899'
+            href='https://transforma-tu-interior.almaymente.io'
             target='_blank'
             rel='noopener noreferrer'
             class='cta-button-large'
           >
-            Inscríbete Ahora
+            Ver Próximo Retiro
           </a>
           <p class='cta-note'>
-            Escríbenos por WhatsApp para más información y reservar tu espacio
+            Conoce las fechas, el lugar y los detalles de nuestra próxima
+            experiencia
           </p>
         </div>
       </div>
@@ -1180,7 +1199,11 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
     }
 
     .hero-dates {
-      margin-bottom: 3.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-soldout {
+      margin-bottom: 3rem;
     }
 
     .date-badge {
@@ -3303,10 +3326,16 @@ import videoTulum3 from "../assets/video/video_tulum_3.mp4";
       font-family: var(--font-secondary);
       font-size: 1.2rem;
       font-weight: 300;
-      margin-bottom: 3rem;
+      margin-bottom: 1.75rem;
       color: rgba(201, 169, 97, 0.9);
       letter-spacing: 2px;
       text-transform: uppercase;
+    }
+
+    .cta-soldout {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2.5rem;
     }
 
     .cta-button-large {

@@ -1,6 +1,7 @@
 ---
 import mainLogo from "../../assets/main_logo_brain.png";
 import Footer from "../../components/Footer.astro";
+import SoldOutBadge from "../../components/SoldOutBadge.astro";
 import { accommodations } from "../../data/accommodations";
 import Layout from "../../layouts/Layout.astro";
 
@@ -246,9 +247,12 @@ if (hasMultiplePrices) {
         <div class='booking-sidebar'>
           <div class='booking-card'>
             <h3 class='card-title'>Reserva tu lugar</h3>
+            <div class='booking-soldout'>
+              <SoldOutBadge variant='compact' label='Agotado' />
+            </div>
             <p class='booking-description'>
-              Para conocer la disponibilidad y los detalles de esta habitación,
-              comunícate directamente con nosotros.
+              Esta habitación ya no tiene disponibilidad para el retiro de
+              Noviembre 2026. Conoce nuestra próxima experiencia.
             </p>
             <p class='booking-note'>
               Incluye alojamiento completo durante los 3 días del retiro, todas
@@ -256,12 +260,12 @@ if (hasMultiplePrices) {
               acceso a todas las instalaciones.
             </p>
             <a
-              href='https://wa.me/573505381899'
+              href='https://transforma-tu-interior.almaymente.io'
               target='_blank'
               rel='noopener noreferrer'
-              class='book-btn'>Iniciar Inscripción</a
+              class='book-btn'>Ver Próximo Retiro</a
             >
-            <p class='limited-spots'>Cupos limitados</p>
+            <p class='limited-spots'>Cupos agotados</p>
           </div>
         </div>
       </div>
@@ -884,6 +888,11 @@ if (hasMultiplePrices) {
     margin-top: 1rem;
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.4);
+  }
+
+  .booking-soldout {
+    display: flex;
+    margin-bottom: 1.25rem;
   }
 
   @keyframes fadeInUp {

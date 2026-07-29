@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import mainLogo from "../assets/main_logo_brain.png";
 import backgroundStars from "../assets/backgorund.png";
+import SoldOutBadge from "../components/SoldOutBadge.astro";
 ---
 
 <Layout>
@@ -24,10 +25,10 @@ import backgroundStars from "../assets/backgorund.png";
         <a href='/' class='navbar-link'>← Volver al inicio</a>
         <a href='/faq' class='navbar-link'>FAQ</a>
         <a
-          href='https://wa.me/573505381899'
+          href='https://transforma-tu-interior.almaymente.io'
           target='_blank'
           rel='noopener noreferrer'
-          class='navbar-link navbar-cta'>Inscríbete</a
+          class='navbar-link navbar-cta'>Ver Próximo Retiro</a
         >
       </div>
     </div>
@@ -118,11 +119,17 @@ import backgroundStars from "../assets/backgorund.png";
     <section class='location-cta'>
       <div class='container'>
         <h2 class='cta-title'>¿Lista para esta experiencia transformadora?</h2>
+        <div class='cta-soldout'>
+          <SoldOutBadge
+            label='Cupos Agotados'
+            note='El retiro de Noviembre 2026 ya está completo.'
+          />
+        </div>
         <a
-          href='https://wa.me/573505381899'
+          href='https://transforma-tu-interior.almaymente.io'
           target='_blank'
           rel='noopener noreferrer'
-          class='cta-button'>Reserva tu Espacio</a
+          class='cta-button'>Ver Próximo Retiro</a
         >
       </div>
     </section>
@@ -643,8 +650,14 @@ import backgroundStars from "../assets/backgorund.png";
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 300;
     color: #ffffff;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     letter-spacing: 0.02em;
+  }
+
+  .cta-soldout {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5rem;
   }
 
   .cta-button {

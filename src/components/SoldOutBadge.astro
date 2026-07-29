@@ -1,0 +1,242 @@
+---
+interface Props {
+  variant?: "hero" | "default" | "compact";
+  label?: string;
+  note?: string;
+  align?: "center" | "left";
+}
+
+const {
+  variant = "default",
+  label = "Agotado",
+  note,
+  align = "center",
+} = Astro.props;
+---
+
+<div class={`soldout soldout--${variant} soldout--align-${align}`}>
+  <div class='soldout-badge'>
+    <span class='soldout-shine'></span>
+    <span class='soldout-dot'></span>
+    <span class='soldout-label'>{label}</span>
+    {variant === "hero" && <span class='soldout-tag'>Sold Out</span>}
+  </div>
+  {note && <p class='soldout-note'>{note}</p>}
+</div>
+
+<style>
+  .soldout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .soldout--align-left {
+    align-items: flex-start;
+  }
+
+  .soldout-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    overflow: hidden;
+    border-radius: 999px;
+    border: 1px solid rgba(224, 90, 90, 0.45);
+    background: linear-gradient(
+      135deg,
+      rgba(180, 45, 45, 0.22) 0%,
+      rgba(10, 10, 15, 0.6) 55%,
+      rgba(201, 169, 97, 0.18) 100%
+    );
+    backdrop-filter: blur(10px);
+    padding: 0.55rem 1.4rem;
+    font-family: "Inter", sans-serif;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .soldout-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+    transform: translateX(-100%);
+    animation: soldout-sweep 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes soldout-sweep {
+    0%,
+    60% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .soldout-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e05a5a;
+    box-shadow: 0 0 12px rgba(224, 90, 90, 0.9);
+  }
+
+  .soldout-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid rgba(224, 90, 90, 0.6);
+    animation: soldout-pulse 2s ease-out infinite;
+  }
+
+  @keyframes soldout-pulse {
+    0% {
+      transform: scale(0.7);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+
+  .soldout-label {
+    position: relative;
+    color: #f3d9a0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .soldout-note {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .soldout--align-left .soldout-note {
+    text-align: left;
+  }
+
+  /* Compact — for cards and tight spaces */
+  .soldout--compact .soldout-badge {
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+  }
+
+  .soldout--compact .soldout-label {
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+  }
+
+  .soldout--compact .soldout-note {
+    font-size: 0.8rem;
+  }
+
+  /* Hero — the showy one */
+  .soldout--hero {
+    gap: 1.1rem;
+  }
+
+  .soldout--hero .soldout-badge {
+    gap: 1rem;
+    padding: 1rem 2.4rem;
+    border-width: 2px;
+    border-color: rgba(224, 90, 90, 0.55);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.25),
+      0 10px 45px rgba(180, 45, 45, 0.35),
+      inset 0 0 30px rgba(224, 90, 90, 0.12);
+    animation: soldout-breathe 3.5s ease-in-out infinite;
+  }
+
+  @keyframes soldout-breathe {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 1px rgba(201, 169, 97, 0.25),
+        0 10px 45px rgba(180, 45, 45, 0.35),
+        inset 0 0 30px rgba(224, 90, 90, 0.12);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(201, 169, 97, 0.45),
+        0 14px 60px rgba(180, 45, 45, 0.55),
+        inset 0 0 40px rgba(224, 90, 90, 0.2);
+    }
+  }
+
+  .soldout--hero .soldout-dot {
+    width: 11px;
+    height: 11px;
+  }
+
+  .soldout--hero .soldout-label {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.4rem, 3.2vw, 2rem);
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    color: #f6e2b4;
+    text-shadow: 0 2px 18px rgba(224, 90, 90, 0.5);
+  }
+
+  .soldout--hero .soldout-tag {
+    position: relative;
+    padding: 0.3rem 0.75rem;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #e05a5a 0%, #b42d2d 100%);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .soldout--hero .soldout-note {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .soldout--hero .soldout-badge {
+      gap: 0.65rem;
+      padding: 0.8rem 1.4rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .soldout--hero .soldout-label {
+      letter-spacing: 0.18em;
+    }
+
+    .soldout--hero .soldout-note {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .soldout-shine,
+    .soldout-dot::after,
+    .soldout--hero .soldout-badge {
+      animation: none;
+    }
+  }
+</style>

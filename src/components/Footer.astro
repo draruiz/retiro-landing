@@ -1,5 +1,6 @@
 ---
 import mainLogo from "../assets/main_logo_brain.png";
+import SoldOutBadge from "./SoldOutBadge.astro";
 ---
 
 <footer class='site-footer'>
@@ -16,6 +17,14 @@ import mainLogo from "../assets/main_logo_brain.png";
           Un encuentro terapéutico-espiritual para reconectar con tu paz
           interior.
         </p>
+        <div class='footer-soldout'>
+          <SoldOutBadge
+            variant='compact'
+            align='left'
+            label='Cupos Agotados'
+            note='Retiro Noviembre 2026 completo'
+          />
+        </div>
       </div>
 
       <!-- Navigation Links -->
@@ -38,9 +47,9 @@ import mainLogo from "../assets/main_logo_brain.png";
           <li><a href='/politicas-cancelacion'>Políticas de Cancelación</a></li>
           <li>
             <a
-              href='https://wa.me/573505381899'
+              href='https://transforma-tu-interior.almaymente.io'
               target='_blank'
-              rel='noopener noreferrer'>Inscripción</a
+              rel='noopener noreferrer'>Ver Próximo Retiro</a
             >
           </li>
         </ul>
@@ -51,11 +60,11 @@ import mainLogo from "../assets/main_logo_brain.png";
         <h4>Contacto</h4>
         <ul>
           <li>
-            <span class='contact-icon'>📱</span>
+            <span class='contact-icon'>🌐</span>
             <a
-              href='https://wa.me/573505381899'
+              href='https://transforma-tu-interior.almaymente.io'
               target='_blank'
-              rel='noopener noreferrer'>WhatsApp</a
+              rel='noopener noreferrer'>Ver Próximo Retiro</a
             >
           </li>
           <li>
@@ -166,6 +175,10 @@ import mainLogo from "../assets/main_logo_brain.png";
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.65);
     letter-spacing: 0.3px;
+  }
+
+  .footer-soldout {
+    margin-top: 1.5rem;
   }
 
   /* Links Sections */
